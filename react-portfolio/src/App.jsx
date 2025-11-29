@@ -1,18 +1,18 @@
 import React from "react";
-import "./App.css";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import "./index.css";
+import Header from "./components/Header/Header";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Skills from "./components/Skills/Skills";
+import Projects from "./components/Projects/Projects";
+import Experience from "./components/Experience/Experience";
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   return (
     <>
-      <header>Header</header>
+      <Header />
       <main>
         <Hero />
         <About />
@@ -21,7 +21,7 @@ const App = () => {
         <Experience />
         <Contact />
       </main>
-      <footer>Footer</footer>
+      <Footer />
     </>
   );
 };
