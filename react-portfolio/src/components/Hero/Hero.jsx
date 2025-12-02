@@ -1,16 +1,11 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Hero = () => {
+const Hero = ({ showAvatarInNav }) => {
   return (
     <section id="hero" className="hero">
       <div className="container hero-inner">
-        <motion.div
-          className="hero-content"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
+        <div className="hero-content">
           <p className="hero-tagline">Hello, I'm</p>
           <h1 className="hero-title">Praveen Dinuwara</h1>
           <p className="hero-subtitle">
@@ -27,20 +22,28 @@ const Hero = () => {
               Contact Me
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="hero-image-wrapper"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <img
-            src="/assets/images/profile.jpg"
-            alt="Profile"
-            className="hero-image"
-          />
-        </motion.div>
+        {/* Avatar*/}
+        <AnimatePresence>
+          {!showAvatarInNav && (
+            <motion.div
+              layoutId="profile-avatar"
+              className="hero-avatar-wrapper"
+              initial={{ opacity: 0, scale: 0.7, rotate: -4 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.8, rotate: 3 }}
+              transition={{ type: "spring", stiffness: 500, damping: 18 }}
+
+            >
+              <img
+                src="/profile.jpeg"  
+                alt="Profile"
+                className="hero-image"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

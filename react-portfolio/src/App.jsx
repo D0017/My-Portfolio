@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
@@ -7,21 +7,32 @@ import Skills from "./components/Skills/Skills";
 import Projects from "./components/Projects/Projects";
 import Experience from "./components/Experience/Experience";
 import Contact from "./components/Contact/Contact";
-import Footer from "./components/Footer/Footer";
 
 const App = () => {
+  const [showAvatarInNav, setShowAvatarInNav] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const triggerPoint = 220; 
+      setShowAvatarInNav(window.scrollY > triggerPoint);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header showAvatarInNav={showAvatarInNav} />
       <main>
-        <Hero />
+        <Hero showAvatarInNav={showAvatarInNav} />
         <About />
         <Skills />
         <Projects />
         <Experience />
         <Contact />
       </main>
-      <Footer />
     </>
   );
 };
