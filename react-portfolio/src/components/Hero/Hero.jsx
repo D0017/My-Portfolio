@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Hero = ({ showAvatarInNav }) => {
   return (
-    <section id="hero" className="hero">
+    <section id="hero" className="hero-full">
       <div className="container hero-inner">
         <div className="hero-content">
           <p className="hero-tagline">Hello, I'm</p>
@@ -15,10 +15,10 @@ const Hero = ({ showAvatarInNav }) => {
             I convert practical challenges into impactful outcomes by designing solutions that create tangible value in real use scenarios.
           </p>
           <div className="hero-actions">
-            <a href="#projects" className="btn btn-primary">
+            <a href="#projects" className="btn btn-Vproject">
               View Projects
             </a>
-            <a href="#contact" className="btn btn-secondary">
+            <a href="#contact" className="btn btn-Contact">
               Contact Me
             </a>
           </div>
