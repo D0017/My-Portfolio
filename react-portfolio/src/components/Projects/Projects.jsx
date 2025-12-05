@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 import { projects } from "../../data/projects";
+import AnimatedTitle from "../AnimatedTitle";
 
 const Projects = () => {
   return (
@@ -15,8 +16,7 @@ const Projects = () => {
     >
       <div className="container">
         <div className="section-header">
-          <h2>Projects</h2>
-          <p>Selected work that showcases my skills</p>
+          <AnimatedTitle text="PROJECTS" />
         </div>
 
         <div className="projects-grid">

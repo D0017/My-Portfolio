@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { skills } from "../../data/skills";
+import AnimatedTitle from "../AnimatedTitle";
 
 const Skills = () => {
   return (
@@ -14,8 +15,7 @@ const Skills = () => {
     >
       <div className="container">
         <div className="section-header">
-          <h2>Skills</h2>
-          <p>Technologies and tools I work with</p>
+          <AnimatedTitle text="SKILLS" />
         </div>
 
         <div className="skills-grid">

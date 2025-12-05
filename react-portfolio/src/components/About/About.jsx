@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import AnimatedTitle from "../AnimatedTitle";
 
 const About = () => {
   return (
@@ -13,7 +14,7 @@ const About = () => {
     >
       <div className="container">
         <div className="section-header">
-          <h2>About Me</h2>
+          <AnimatedTitle text="ABOUT ME" />
         </div>
 
         <div className="about-layout">
