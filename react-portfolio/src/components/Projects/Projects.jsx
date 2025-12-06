@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ProjectCard from "./ProjectCard";
 import { projects } from "../../data/projects";
 import AnimatedTitle from "../AnimatedTitle";
+import ProjectGrid from "./ProjectGrid"; 
 
 const Projects = () => {
   return (
@@ -19,11 +19,7 @@ const Projects = () => {
           <AnimatedTitle text="PROJECTS" />
         </div>
 
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </div>
+        <ProjectGrid projects={projects} />
       </div>
     </motion.section>
   );
