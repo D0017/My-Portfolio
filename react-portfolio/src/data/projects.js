@@ -1,4 +1,3 @@
-// src/data/projects.js
 export const projects = [
   {
     id: 1,
@@ -20,9 +19,10 @@ export const projects = [
     id: 2,
     title: "Pink Aura Salon & Spa Management System",
     type: "Web App",
+    stackLabel: "MERN Stack (Full-Stack)",
     description:
-      "Full-stack salon management platform with appointment scheduling, staff management, product inventory, and customer loyalty tiers.",
-    technologies: ["MongoDB", "Express", "React", "Node.js", "Azure Blob Storage"],
+      "Full-stack salon management platform with appointment scheduling, staff management, product inventory, and  AI-Powered Chat Bot.",
+    technologies: ["MongoDB", "Express", "React", "Node.js", "RESTful APIs"],
     highlights: [
       "Image uploads using Azure Blob Storage",
       "Role-based admin/staff dashboard",
@@ -30,7 +30,8 @@ export const projects = [
     ],
     image: "/assets/images/pink-aura.png",
     github: "https://github.com/your-username/pink-aura",
-    demo: "https://pink-aura-demo-url.com"
+    demo: "https://pink-aura-demo-url.com",
+    featured: true
   },
 
 ];
