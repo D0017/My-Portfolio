@@ -1,30 +1,22 @@
 import React from "react";
-import { motion } from "framer-motion";
 
 const FeaturedProjectPoster = ({ project }) => {
   if (!project) return null;
 
   return (
     <div className="poster-wrapper">
+      <div className="poster-bg-shape poster-bg-shape--left" />
+      <div className="poster-bg-shape poster-bg-shape--right" />
 
-      <motion.div
-        className="poster-card"
-        initial={{ opacity: 0, y: 24, scale: 0.98 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.4 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
+      <div className="poster-card">
         <div className="poster-content">
           <div className="poster-eyebrow-row">
             <span className="poster-pill">Featured project</span>
-        
           </div>
 
           <h3 className="poster-title">{project.title}</h3>
 
-          {project.type && (
-            <p className="poster-type">{project.type}</p>
-          )}
+          {project.type && <p className="poster-type">{project.type}</p>}
 
           {project.description && (
             <p className="poster-desc">{project.description}</p>
@@ -81,6 +73,7 @@ const FeaturedProjectPoster = ({ project }) => {
           )}
         </div>
 
+        {/* image frame */}
         <div className="poster-visual">
           <div className="poster-main-frame">
             {project.image ? (
@@ -96,7 +89,7 @@ const FeaturedProjectPoster = ({ project }) => {
             )}
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
