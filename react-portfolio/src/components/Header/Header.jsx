@@ -7,7 +7,7 @@ const Header = ({ showAvatarInNav }) => {
     <header className="header">
       <nav className="nav">
         <div className="nav-left">
-          <div className="logo">Portfolio</div>
+          <div className="logo">PRAVEEN DINUWARA</div>
 
           {/* Circular slot */}
           <div className="nav-avatar-slot">
@@ -33,7 +33,6 @@ const Header = ({ showAvatarInNav }) => {
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
