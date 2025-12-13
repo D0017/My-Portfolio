@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TypingText = ({ text, speed = 30, className = "", onComplete }) => {
+const TypingText = ({ text, speed = 30, className = "" }) => {
   const [displayed, setDisplayed] = useState("");
 
   useEffect(() => {
     let i = 0;
-    let timer;
+    let frame;
 
     const type = () => {
       setDisplayed(text.slice(0, i + 1));
       i += 1;
       if (i < text.length) {
-        timer = setTimeout(type, speed);
-      } else if (onComplete) {
-        onComplete();
+        frame = setTimeout(type, speed);
       }
     };
 
     type();
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(frame);
     };
-  }, [text, speed, onComplete]);
+  }, [text, speed]);
 
   return <span className={className}>{displayed}</span>;
 };
 
 const Hero = ({ showAvatarInNav }) => {
   const [introDone, setIntroDone] = useState(false);
-  const [showActions, setShowActions] = useState(false);
 
   // Lock scroll during intro
   useEffect(() => {
@@ -52,7 +49,7 @@ const Hero = ({ showAvatarInNav }) => {
 
   return (
     <>
-      {/* Intro  */}
+      {/* Intro overlay */}
       <AnimatePresence>
         {!introDone && !showAvatarInNav && (
           <motion.div
@@ -140,23 +137,15 @@ const Hero = ({ showAvatarInNav }) => {
                 <TypingText
                   text="I convert practical challenges into impactful outcomes by designing solutions that create tangible value in real use scenarios."
                   speed={12}
-                  onComplete={() => setShowActions(true)}
                 />
               )}
             </motion.p>
 
             <motion.div
               className="hero-actions"
-              initial={{ opacity: 0, y: 16 }}
-              animate={
-                showActions
-                  ? { opacity: 1, y: 0 }
-                  : { opacity: 0, y: 16 }
-              }
-              transition={{ duration: 0.45 }}
-              style={{
-                pointerEvents: showActions ? "auto" : "none",
-              }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={introDone ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 1.4 }}
             >
               <a href="#projects" className="btn btn-Vproject">
                 View Projects
@@ -167,7 +156,7 @@ const Hero = ({ showAvatarInNav }) => {
             </motion.div>
           </div>
 
-          {/* Avatar in final position  */}
+          {/* Avatar in final position */}
           <AnimatePresence>
             {!showAvatarInNav && introDone && (
               <motion.div
