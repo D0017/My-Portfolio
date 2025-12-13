@@ -354,6 +354,10 @@ h3 {
   display: flex;
   justify-content: center;
   margin-bottom: 2rem;
+  perspective: 1000px;   
+}
+.hero-intro-avatar .hero-image {
+  backface-visibility: hidden;     
 }
 
 .hero-loader-wrapper {
@@ -385,7 +389,7 @@ h3 {
   color: var(--text-muted);
 }
 
-/* ------------ RESPONSIVE ------------ */
+/*  RESPONSIVE  */
 
 @media (max-width: 900px) {
   .hero-inner {

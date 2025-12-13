@@ -29,19 +29,33 @@ const TypingText = ({ text, speed = 30, className = "" }) => {
 const Hero = ({ showAvatarInNav }) => {
   const [introDone, setIntroDone] = useState(false);
 
+  //flip control 
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [showProfileImage, setShowProfileImage] = useState(false); 
+
   // Lock scroll during intro
   useEffect(() => {
     if (!introDone) {
       const previousOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
 
+      const flipStart = setTimeout(() => {
+        setIsFlipping(true);
+      }, 1700); 
+
+      const swapImage = setTimeout(() => {
+        setShowProfileImage(true);
+      }, 1700 + 300); 
+
       const timer = setTimeout(() => {
         setIntroDone(true);
         document.body.style.overflow = previousOverflow || "";
-      }, 2300); 
+      }, 2300);
 
       return () => {
         clearTimeout(timer);
+        clearTimeout(flipStart);
+        clearTimeout(swapImage);
         document.body.style.overflow = previousOverflow || "";
       };
     }
@@ -62,13 +76,31 @@ const Hero = ({ showAvatarInNav }) => {
             <motion.div
               layoutId="profile-avatar"
               className="hero-intro-avatar"
-              initial={{ scale: 0.8, y: -25, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
+              initial={{ scale: 0.8, y: -25, opacity: 0, rotateY: 0 }}
+              animate={{
+                scale: 1,
+                y: 0,
+                opacity: 1,
+                rotateY: isFlipping ? [0, 90, 0] : 0,
+              }}
               exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 450, damping: 24 }}
+              transition={{
+                scale: { type: "spring", stiffness: 450, damping: 24 },
+                y: { type: "spring", stiffness: 450, damping: 24 },
+                opacity: { duration: 0.4 },
+                rotateY: isFlipping
+                  ? { duration: 0.6, ease: "easeInOut" }
+                  : { duration: 0 },
+              }}
+              style={{ transformStyle: "preserve-3d" }}
             >
               <img
-                src="/profile.jpeg"
+
+                src={
+                  showProfileImage
+                    ? "/profile.jpeg"          //  profile image
+                    : "/profile-loading.jpeg"  // loading image
+                }
                 alt="Profile"
                 className="hero-image"
               />
