@@ -446,7 +446,7 @@ h3 {
 .about-section::before {
   width: 320px;
   height: 320px;
-  background: rgba(129, 140, 248, 0.8);
+  background: rgba(222, 223, 230, 0.8);
   top: -80px;
   right: 10%;
 }
@@ -454,7 +454,7 @@ h3 {
 .about-section::after {
   width: 260px;
   height: 260px;
-  background: rgba(45, 212, 191, 0.7);
+  background: rgba(227, 232, 231, 0.7);
   bottom: -60px;
   left: 5%;
 }

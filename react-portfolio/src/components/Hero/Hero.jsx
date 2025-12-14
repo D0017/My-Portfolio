@@ -99,7 +99,7 @@ const Hero = ({ showAvatarInNav }) => {
                 src={
                   showProfileImage
                     ? "/profile.jpeg"          //  profile image
-                    : "/profile-loading.jpeg"  // loading image
+                    : "/loading.gif"          // loading gif
                 }
                 alt="Profile"
                 className="hero-image"
