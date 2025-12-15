@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { skills } from "../../data/skills";
 import AnimatedTitle from "../AnimatedTitle";
+import TopicFlowOverlay from "./TopicFlowOverlay";
 
 const Skills = () => {
-  const entries = Object.entries(skills); 
-  const [activeIndex, setActiveIndex] = useState(0); 
+  const entries = Object.entries(skills);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const imgForCategory = (category) =>
+    `https://picsum.photos/seed/${encodeURIComponent(category)}/600/400`;
 
   return (
     <motion.section
@@ -23,7 +26,8 @@ const Skills = () => {
       <div className="skills-strip">
         {entries.map(([category, items], index) => {
           const isActive = index === activeIndex;
-          const labelNumber = `00-${index + 1}`;   // <-- added
+          const labelNumber = `00-${index + 1}`;
+          const prettyTitle = category.charAt(0).toUpperCase() + category.slice(1);
 
           return (
             <motion.div
@@ -34,9 +38,12 @@ const Skills = () => {
             >
               <div className="skills-column-header">
                 <span className="skills-index">{labelNumber}</span>
-                <h3 className="skills-title">
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </h3>
+                <h3 className="skills-title">{prettyTitle}</h3>
+                <TopicFlowOverlay
+                  text={prettyTitle}
+                  image={imgForCategory(category)}
+                  active={isActive}
+                />
               </div>
 
               <ul className="skills-list">
