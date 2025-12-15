@@ -1,21 +1,19 @@
 import React from "react";
 import { gsap } from "gsap";
 
-const TopicFlowOverlay = ({ text, image, active }) => {
+const TopicFlowOverlay = ({ title, icons = [], active }) => {
   const marqueeRef = React.useRef(null);
   const marqueeInnerRef = React.useRef(null);
 
   React.useEffect(() => {
     if (!marqueeRef.current || !marqueeInnerRef.current) return;
 
-    // When not active, hidden below
     if (!active) {
       gsap.set(marqueeRef.current, { y: "101%" });
       gsap.set(marqueeInnerRef.current, { y: "-101%" });
       return;
     }
 
-    // Active, slide in
     gsap
       .timeline({ defaults: { duration: 0.6, ease: "expo.out" } })
       .set(marqueeRef.current, { y: "101%" }, 0)
@@ -23,28 +21,26 @@ const TopicFlowOverlay = ({ text, image, active }) => {
       .to([marqueeRef.current, marqueeInnerRef.current], { y: "0%" }, 0);
   }, [active]);
 
-  const repeated = Array.from({ length: 4 }).map((_, idx) => (
-    <React.Fragment key={idx}>
-      <span>{text}</span>
-      <div
-        className="topic-marquee__img"
-        style={{ backgroundImage: `url(${image})` }}
-      />
-    </React.Fragment>
-  ));
+  const base = icons.length ? icons : [];
+  const repeated = Array.from({ length: 10 }).flatMap((_, i) =>
+    base.map((src, idx) => (
+      <div key={`${i}-${idx}`} className="topic-marquee__icon">
+        <img src={src} alt={title} loading="lazy" />
+      </div>
+    ))
+  );
 
   return (
-  <div
-    className={`topic-marquee ${active ? "is-visible" : ""}`}
-    ref={marqueeRef}
-    aria-hidden="true"
-  >
-    <div className="topic-marquee__inner-wrap" ref={marqueeInnerRef}>
-      <div className="topic-marquee__inner">{repeated}</div>
+    <div
+      className={`topic-marquee ${active ? "is-visible" : ""}`}
+      ref={marqueeRef}
+      aria-hidden="true"
+    >
+      <div className="topic-marquee__inner-wrap" ref={marqueeInnerRef}>
+        <div className="topic-marquee__inner">{repeated}</div>
+      </div>
     </div>
-  </div>
-);
-
+  );
 };
 
 export default TopicFlowOverlay;
