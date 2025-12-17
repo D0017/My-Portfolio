@@ -308,6 +308,12 @@ h3 {
   position: relative;
   z-index: 2;
 }
+.hero-loading-avatar{
+  width: 260px;
+  height: 260px;
+  display: grid;
+  place-items: center;
+}
 
 .hero-image {
   width: 260px;
@@ -323,20 +329,6 @@ h3 {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
-}
-
-.hero-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
-  pointer-events: none;
 }
 
 .hero-image:hover {

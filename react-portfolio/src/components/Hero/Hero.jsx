@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CodeFrameLoader from "./CodeFrameLoader";
 
 const TypingText = ({ text, speed = 30, className = "" }) => {
   const [displayed, setDisplayed] = useState("");
@@ -94,16 +95,17 @@ const Hero = ({ showAvatarInNav }) => {
               }}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <img
-
-                src={
-                  showProfileImage
-                    ? "/profile.jpeg"          //  profile image
-                    : "/loading.gif"          // loading gif
-                }
+              {showProfileImage ? (
+                <img 
+                src="/profile.jpeg"
                 alt="Profile"
-                className="hero-image"
-              />
+                className="hero-image" />
+              ) : (
+                <div className="hero-loading-avatar">
+                  <CodeFrameLoader size={220} />
+                </div>
+              )}
+
             </motion.div>
 
             <div className="hero-loader-wrapper">
