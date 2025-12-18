@@ -37,6 +37,8 @@ const Hero = ({ showAvatarInNav }) => {
 
   useEffect(() => {
     if (!introDone) {
+      document.documentElement.classList.add("intro-active");
+
       const previousOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
 
@@ -51,6 +53,7 @@ const Hero = ({ showAvatarInNav }) => {
       const timer = setTimeout(() => {
         setIntroDone(true);
         document.body.style.overflow = previousOverflow || "";
+        document.documentElement.classList.add("intro-done");
       }, 4300);
 
       return () => {
