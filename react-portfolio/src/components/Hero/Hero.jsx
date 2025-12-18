@@ -99,7 +99,7 @@ const Hero = ({ showAvatarInNav }) => {
               style={{ transformStyle: "preserve-3d" }}
             >
               {showProfileImage ? (
-                <img src="/profile.jpeg" alt="Profile" className="hero-image" />
+                <img src="/profile2.jpg" alt="Profile" className="hero-image" />
               ) : (
                 <div className="hero-loading-avatar">
                   <RingLettersLoader
@@ -218,7 +218,7 @@ const Hero = ({ showAvatarInNav }) => {
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
               >
                 <img
-                  src="/profile.jpeg"
+                  src="/profile2.jpg"
                   alt="Profile"
                   className="hero-image"
                 />

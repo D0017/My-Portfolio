@@ -29,8 +29,8 @@ const About = () => {
             <div className="about2-main">
 
               <h3 className="about2-headline">
-                Building real-world apps with <span>clean UX</span> and{" "}
-                <span>reliable code</span>.
+                Driven by <span>curiosity</span>,{" "}shaped through{" "}
+                <span>continuous learning</span>.
               </h3>
 
               <p className="about2-text">
