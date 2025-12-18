@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CodeFrameLoader from "./CodeFrameLoader";
+import RingLettersLoader from "./RingLettersLoader";
 
+const LOADING_DURATION = 3500;
 const TypingText = ({ text, speed = 30, className = "" }) => {
   const [displayed, setDisplayed] = useState("");
 
@@ -34,7 +35,6 @@ const Hero = ({ showAvatarInNav }) => {
   const [isFlipping, setIsFlipping] = useState(false);
   const [showProfileImage, setShowProfileImage] = useState(false); 
 
-  // Lock scroll during intro
   useEffect(() => {
     if (!introDone) {
       const previousOverflow = document.body.style.overflow;
@@ -42,16 +42,16 @@ const Hero = ({ showAvatarInNav }) => {
 
       const flipStart = setTimeout(() => {
         setIsFlipping(true);
-      }, 1700); 
+      }, 3500); 
 
       const swapImage = setTimeout(() => {
         setShowProfileImage(true);
-      }, 1700 + 300); 
+      }, 3800); 
 
       const timer = setTimeout(() => {
         setIntroDone(true);
         document.body.style.overflow = previousOverflow || "";
-      }, 2300);
+      }, 4300);
 
       return () => {
         clearTimeout(timer);
@@ -96,13 +96,23 @@ const Hero = ({ showAvatarInNav }) => {
               style={{ transformStyle: "preserve-3d" }}
             >
               {showProfileImage ? (
-                <img 
-                src="/profile.jpeg"
-                alt="Profile"
-                className="hero-image" />
+                <img src="/profile.jpeg" alt="Profile" className="hero-image" />
               ) : (
                 <div className="hero-loading-avatar">
-                  <CodeFrameLoader size={220} />
+                  <RingLettersLoader
+                    size={260}
+                    text="Builder  Developer  Designer  Analyst  Innovator"
+                    durationMs={LOADING_DURATION}
+                    cloudSpread={1500}
+                    wordsOuter="Problem-Solver Developer Analyst Architect"
+                    wordsMid="PORTFOLIO UI UX"
+                    wordsInner="CODE BUILD CREATE"
+                    rings={[
+                      { count: 48, radius: 112, speed: 0.75, fontSize: 14, opacity: 0.95 },
+                      { count: 36, radius: 86,  speed: -0.52, fontSize: 12, opacity: 0.80 },
+                      { count: 24, radius: 60,  speed: 0.40, fontSize: 10, opacity: 0.65 },
+                    ]}
+                  />
                 </div>
               )}
 
@@ -114,11 +124,14 @@ const Hero = ({ showAvatarInNav }) => {
                   className="hero-loader-bar-fill"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{ duration: 1.7, ease: "easeInOut" }}
+                  transition={{
+                    duration: LOADING_DURATION / 1000,
+                    ease: "linear",
+                  }}
                 />
               </div>
               <p className="hero-loader-text">
-                Preparing your experience...
+                Crafting the details...
               </p>
             </div>
           </motion.div>

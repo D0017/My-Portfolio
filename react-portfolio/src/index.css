@@ -476,7 +476,7 @@ h3 {
   font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #f4f4f4;
   font-weight: 500;
 }
 
