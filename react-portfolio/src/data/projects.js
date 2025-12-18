@@ -3,6 +3,7 @@ export const projects = [
     id: 1,
     title: "Daily Bloom – Wellness Tracker App",
     type: "Mobile App",
+    stackLabel: "Android (Kotlin)",
     description:
       "Android wellness tracker built with Kotlin. Features habit tracking, mood logging, hydration reminders, and data visualization using charts.",
     technologies: ["Kotlin", "Android Studio", "Room DB", "ViewModel", "LiveData"],
@@ -12,7 +13,7 @@ export const projects = [
       "Notification scheduling for reminders"
     ],
     image: "/assets/images/daily-bloom.png",
-    github: "https://github.com/your-username/DailyBloom",
+    github: "https://github.com/D0017/DailyBloom",
     demo: null
   },
   {
@@ -29,8 +30,8 @@ export const projects = [
       "Integrated marketing and review modules"
     ],
     image: "/assets/images/pink-aura.png",
-    github: "https://github.com/your-username/pink-aura",
-    demo: "https://pink-aura-demo-url.com",
+    github: "https://github.com/kezu1003/Pink-Aura-Salon-Management-System",
+    demo: null,
     featured: true
   },
 

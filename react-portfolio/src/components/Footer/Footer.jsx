@@ -7,6 +7,9 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-inner container">
+        <div className="footer-hero-wrap">
+          <AnimatedFooterTitle text="PRAVEEN DINUWARA" />
+        </div>
         <div className="footer-top">
           <div className="footer-left">
             <p className="footer-label">Portfolio</p>
@@ -27,9 +30,6 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="footer-hero-wrap">
-          <AnimatedFooterTitle text="PRAVEEN DINUWARA" />
-        </div>
       </div>
     </footer>
   );
