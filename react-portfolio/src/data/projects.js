@@ -12,9 +12,10 @@ export const projects = [
       "Local persistence with Room and custom DAOs",
       "Notification scheduling for reminders"
     ],
-    image: "/assets/images/daily-bloom.png",
+    image: "/assets/images/Daily BLOOM.jpg",
     github: "https://github.com/D0017/DailyBloom",
-    demo: null
+    demo: null,
+    featured: false
   },
   {
     id: 2,

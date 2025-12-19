@@ -11,7 +11,7 @@ const FeaturedProjectPoster = ({ project }) => {
       <div className="poster-card">
         <div className="poster-content">
           <div className="poster-eyebrow-row">
-            <span className="poster-pill">Featured project</span>
+            {project.featured && <span className="poster-pill">Featured project</span>}
           </div>
 
           <h3 className="poster-title">{project.title}</h3>
