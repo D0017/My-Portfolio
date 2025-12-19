@@ -1,13 +1,13 @@
 :root {
-  --bg-main: linear-gradient(
-    135deg,
-    #1B1F17 0%,
-    #262C22 25%,
-    #4A5448 45%,
-    #7A8774 65%,
-    #9EAE9B 85%,
-    #C2D2BF 100%
-    
+--bg-main: linear-gradient(
+  135deg,
+  #1B1F17 0%,
+  #262C22 18%,
+  #4A5448 36%,
+  #7A8774 54%,
+  #9EAE9B 72%,
+  #C2D2BF 100%
+
   );;
   --bg-alt: #ffffff;
   --accent: #2e2e2e;
@@ -174,7 +174,6 @@ h3 {
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-med),
-    background var(--transition-med),
     color var(--transition-med),
     border-color var(--transition-med);
 }
@@ -522,9 +521,8 @@ h3 {
 
 .about2 {
   padding: 5.5rem 0 5rem;
-  background: var(--p-bg);         
-  color: var(--p-ink);
-  
+  background-color: #cad3c6;
+  color: var(--p-ink); 
 }
 
 .about2-title {
@@ -537,31 +535,54 @@ h3 {
   position: relative;
   border-radius: 26px;
   padding: 2.3rem 2.2rem;
-  background: var(--p-surface);
-  border: 1px solid var(--p-border);
+  background:     linear-gradient(
+      135deg,
+      rgba(154, 170, 150, 0.35),
+      rgba(40, 45, 38, 0.35)
+    );
   box-shadow: 0 24px 60px rgba(16, 16, 8, 0.10);
   overflow: hidden;
+  transition: 
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
 }
+
+.about2-surface:hover {
+  box-shadow:
+    0 35px 90px rgba(16, 16, 8, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  border-color: rgba(60, 80, 60, 0.45);
+}
+.about2-surface::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.35),
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.9s ease;
+  pointer-events: none;
+}
+
+.about2-surface:hover::before {
+  transform: translateX(100%);
+}
+
 
 .about2-bg {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(650px 280px at 20% 20%, rgba(176, 200, 176, 0.20), transparent 60%),
-    radial-gradient(520px 280px at 85% 25%, rgba(112, 128, 112, 0.14), transparent 55%);
+  background: linear-gradient(
+      135deg,
+      rgba(154, 170, 150, 0.35),
+      rgba(40, 45, 38, 0.35)
+    );
   opacity: 0.8;
-}
-
-.about2-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(rgba(16,16,8,0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(16,16,8,0.045) 1px, transparent 1px);
-  background-size: 60px 60px;       
-  opacity: 0.18;                    
 }
 
 .about2-layout {
@@ -617,8 +638,8 @@ h3 {
   padding: 0.42rem 0.78rem;
   border-radius: 999px;
   border: 1px solid rgba(242, 245, 242, 0.3);
-  background: rgba(10, 143, 10, 0.18);
-  color: var(--p-ink2);
+  background: #000000;
+  color: #f0f0f0;
 }
 
 .about2-panel {

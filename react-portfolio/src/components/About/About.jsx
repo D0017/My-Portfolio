@@ -17,11 +17,12 @@ const About = () => {
         </motion.div>
 
         <motion.div
-          className="about2-surface"
+          className="about2-surface popup-title"
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.55, ease: "easeOut" }}
+          whileHover={{ y: -6, scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 220, damping: 20 }}
         >
           <div className="about2-bg" aria-hidden="true" />
 
