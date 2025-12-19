@@ -730,16 +730,23 @@ h3 {
   display: flex;
   gap: 14px;
   padding: 14px 14px; 
-  overflow: hidden;
-  min-height: 320px;
+  overflow-x: auto;           
+  overflow-y: hidden;
+  min-height: 420px;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
   border: none;            
   background: transparent;
 }
+.skills-strip::-webkit-scrollbar { height: 8px; }
+.skills-strip::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 999px; }
+
 
 .skills-column {
   position: relative;
-  flex: 1;
-  min-width: 0;
+  flex: 1 0 260px;             
+  min-width: 260px;
+  scroll-snap-align: start;
   padding: 2.2rem 2rem;
   cursor: pointer;
 

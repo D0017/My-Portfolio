@@ -25,8 +25,8 @@ export const skills = {
   tools: [
     "Git & GitHub",
     "VS Code",
-    "Android Studio",
     "Postman",
+    "Android Studio",
     "Figma / UI wireframing tools"
   ],
   concepts: [
