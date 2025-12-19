@@ -51,20 +51,63 @@ const About = () => {
             </div>
 
             <div className="about2-panel">
-              <div className="about2-card">
-                <h4>What I do</h4>
-                <p>Delivering clean, purposeful solutions tailored to user needs.</p>
+
+              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-1.jpg)" }}>
+                <div className="flip-clip">
+                <div className="flip-inner">
+                  {/* FRONT */}
+                  <div className="flip-face flip-front">
+                    <div className="flip-front-overlay" />
+                    <div className="flip-front-content">
+                      <h4 className="flip-kicker">What I do</h4>
+                    </div>
+                  </div>
+                  {/* BACK */}
+                  <div className="flip-face flip-back">
+                    <p>Delivering clean, purposeful solutions tailored to user needs.</p>
+                  </div>
+                </div>
+                </div>
               </div>
 
-              <div className="about2-card">
-                <h4>Tech Focus</h4>
-                <p>React, Node.js, Kotlin, and full-stack web & mobile development</p>
+              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-2.jpg)" }}>
+                <div className="flip-clip">
+                <div className="flip-inner">
+                  {/* FRONT */}
+                  <div className="flip-face flip-front">
+                    <div className="flip-front-overlay" />
+                    <div className="flip-front-content">
+                      <h4 className="flip-kicker">Tech Focus</h4>
+                    </div>
+                  </div>
+
+                  {/* BACK */}
+                  <div className="flip-face flip-back">
+                    <p>React, Node.js, Kotlin, and full-stack web & mobile development</p>
+                  </div>
+                </div>
+                </div>
               </div>
 
-              <div className="about2-card">
-                <h4>How I work</h4>
-                <p>Break down problems → design flow → build iteratively → refine UX.</p>
+              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-3.jpg)" }}>
+                <div className="flip-clip">
+                <div className="flip-inner">
+                  {/* FRONT */}
+                  <div className="flip-face flip-front">
+                    <div className="flip-front-overlay" />
+                    <div className="flip-front-content">
+                      <h4 className="flip-kicker">How I work</h4>
+                    </div>
+                  </div>
+
+                  {/* BACK */}
+                  <div className="flip-face flip-back">
+                    <p>Break down problems → design flow → build iteratively → refine UX.</p>
+                  </div>
+                </div>
+                </div>
               </div>
+
             </div>
           </div>
         </motion.div>
