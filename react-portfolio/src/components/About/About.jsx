@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AnimatedTitle from "../AnimatedTitle";
+import ProfileCard from "./ProfileCard";
 
 const About = () => {
   return (
@@ -28,7 +29,6 @@ const About = () => {
 
           <div className="about2-layout">
             <div className="about2-main">
-
               <h3 className="about2-headline">
                 Driven by <span>curiosity</span>,{" "}shaped through{" "}
                 <span>continuous learning</span>.
@@ -46,8 +46,14 @@ const About = () => {
                 <span className="about2-chip">Designer</span>
                 <span className="about2-chip">Developer</span>
                 <span className="about2-chip">Problem Solver</span>
-
               </div>
+
+              <div className="about2-profileRow">
+                <ProfileCard
+                  photoUrl="/assets/images/card-profile.jpg"
+                />
+              </div>
+
             </div>
 
             <div className="about2-panel">
@@ -59,7 +65,6 @@ const About = () => {
                   <div className="flip-face flip-front">
                     <div className="flip-front-overlay" />
                     <div className="flip-front-content">
-                      <h4 className="flip-kicker">What I do</h4>
                     </div>
                   </div>
                   {/* BACK */}
@@ -77,7 +82,6 @@ const About = () => {
                   <div className="flip-face flip-front">
                     <div className="flip-front-overlay" />
                     <div className="flip-front-content">
-                      <h4 className="flip-kicker">Tech Focus</h4>
                     </div>
                   </div>
 
@@ -96,7 +100,6 @@ const About = () => {
                   <div className="flip-face flip-front">
                     <div className="flip-front-overlay" />
                     <div className="flip-front-content">
-                      <h4 className="flip-kicker">How I work</h4>
                     </div>
                   </div>
 

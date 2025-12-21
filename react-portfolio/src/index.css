@@ -594,14 +594,6 @@ h3 {
   align-items: start;
 }
 
-.about2-kicker {
-  margin: 0 0 0.75rem;
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--p-muted);
-}
-
 .about2-headline {
   margin: 0 0 1rem;
   font-size: clamp(1.35rem, 2.2vw, 1.8rem);
@@ -622,6 +614,12 @@ h3 {
   font-size: 1.02rem;
   line-height: 1.75;
   color: var(--p-muted);
+}
+
+.about2-profileRow{
+  margin-top: 1.4rem;
+  display: flex;
+  justify-content: center; 
 }
 
 .about2-chips {
@@ -698,16 +696,11 @@ h3 {
   gap: 6px;
 }
 
-
-.flip-back h4 {
-  margin: 0;
-  font-size: 1rem;
-}
-
 .flip-back p {
   margin: 0;
   line-height: 1.35;
   opacity: 0.9;
+  font-size: larger;
 }
 
 .flip-card {

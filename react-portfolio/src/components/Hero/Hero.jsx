@@ -171,7 +171,7 @@ const Hero = ({ showAvatarInNav }) => {
             >
               {introDone && (
                 <TypingText
-                  text="IT undergraduate at SLIIT & Practical Problem Solver."
+                  text="IT undergraduate & Practical Problem Solver."
                   speed={25}
                 />
               )}
