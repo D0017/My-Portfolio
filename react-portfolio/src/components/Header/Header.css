@@ -79,14 +79,14 @@
   text-transform: uppercase;
   letter-spacing: 0.15em;
 
-  color: #9CA3AF;
+  color: #fff;
   text-decoration: none;
 
   transition: color 0.25s ease;
 }
 
 .nav-links a:hover {
-  color: #E5E7EB;
+  color: #9CA3AF;
   text-shadow:
     0 0 8px rgba(229, 231, 235, 0.35);
 }
