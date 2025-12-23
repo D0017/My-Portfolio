@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Header = ({ showAvatarInNav }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 720) setMenuOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <header className="header">
       <nav className="nav">
         <div className="nav-left">
           <div className="logo">PRAVEEN DINUWARA</div>
 
-          {/* Circular slot */}
           <div className="nav-avatar-slot">
             <AnimatePresence>
               {showAvatarInNav && (
@@ -22,18 +32,28 @@ const Header = ({ showAvatarInNav }) => {
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   exit={{ opacity: 0, scale: 0.6, rotate: -4 }}
                   transition={{ type: "spring", stiffness: 520, damping: 20 }}
-
                 />
               )}
             </AnimatePresence>
           </div>
         </div>
 
-        <ul className="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+        <button
+          className={`nav-toggle ${menuOpen ? "is-open" : ""}`}
+          aria-label="Toggle navigation"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span />
+          <span />
+        </button>
+        
+        {/* Links */}
+        <ul className={`nav-links ${menuOpen ? "is-open" : ""}`}>
+          <li><a href="#about" onClick={closeMenu}>About</a></li>
+          <li><a href="#skills" onClick={closeMenu}>Skills</a></li>
+          <li><a href="#projects" onClick={closeMenu}>Projects</a></li>
+          <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
         </ul>
       </nav>
     </header>
