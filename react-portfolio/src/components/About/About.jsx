@@ -50,7 +50,8 @@ const About = () => {
 
               <div className="about2-profileRow">
                 <ProfileCard
-                  photoUrl="/assets/images/card-profile.jpg"
+                  photoUrl={`${import.meta.env.BASE_URL}assets/images/card-profile.jpg`}
+
                 />
               </div>
 
@@ -58,7 +59,10 @@ const About = () => {
 
             <div className="about2-panel">
 
-              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-1.jpg)" }}>
+              <div className="about2-card flip-card" style={{
+                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-1.jpg)`
+              }}
+              >
                 <div className="flip-clip">
                 <div className="flip-inner">
                   {/* FRONT */}
@@ -75,7 +79,10 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-2.jpg)" }}>
+              <div className="about2-card flip-card" style={{
+                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-2.jpg)`
+              }}
+              >
                 <div className="flip-clip">
                 <div className="flip-inner">
                   {/* FRONT */}
@@ -93,7 +100,10 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="about2-card flip-card" style={{ "--bg": "url(/assets/images/about-card-3.jpg)" }}>
+              <div className="about2-card flip-card" style={{
+                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-3.jpg)`
+              }}
+              >
                 <div className="flip-clip">
                 <div className="flip-inner">
                   {/* FRONT */}

@@ -84,7 +84,7 @@ const Hero = ({ showAvatarInNav }) => {
               style={{ transformStyle: "preserve-3d" }}
             >
               {showProfileImage ? (
-                <img src="/profile2.jpg" alt="Profile" className="hero-image" />
+                <img src={`${import.meta.env.BASE_URL}profile2.jpg`} alt="Profile" className="hero-image" />
               ) : (
                 <div className="hero-loading-avatar">
                   <RingLettersLoader
@@ -192,7 +192,7 @@ const Hero = ({ showAvatarInNav }) => {
                 exit={{ opacity: 0, x: 40, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
               >
-                <img src="/profile2.jpg" alt="Profile" className="hero-image" />
+              <img src={`${import.meta.env.BASE_URL}profile2.jpg`} alt="Profile" className="hero-image" />
               </motion.div>
             )}
           </AnimatePresence>

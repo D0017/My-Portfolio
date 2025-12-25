@@ -12,7 +12,7 @@ export const projects = [
       "Local persistence with Room and custom DAOs",
       "Notification scheduling for reminders"
     ],
-    image: "/assets/images/Daily BLOOM.png",
+    image: `${import.meta.env.BASE_URL}assets/images/Daily BLOOM.png`,
     github: "https://github.com/D0017/DailyBloom",
     demo: null,
     featured: false
@@ -30,7 +30,7 @@ export const projects = [
       "Role-based admin/staff dashboard",
       "Integrated marketing and review modules"
     ],
-    image: "/assets/images/pink-aura.png",
+    image: `${import.meta.env.BASE_URL}assets/images/pink-aura.png`,
     github: "https://github.com/kezu1003/Pink-Aura-Salon-Management-System",
     demo: null,
     featured: true

@@ -25,7 +25,7 @@ const Header = ({ showAvatarInNav }) => {
               {showAvatarInNav && (
                 <motion.img
                   layoutId="profile-avatar"
-                  src="/profile2.jpg"
+                  src={`${import.meta.env.BASE_URL}profile2.jpg`}
                   alt="Profile"
                   className="nav-avatar-img"
                   initial={{ opacity: 0, scale: 0.4, rotate: 4 }}
