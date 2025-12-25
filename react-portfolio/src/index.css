@@ -417,6 +417,9 @@ h3 {
   justify-content: center;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
+  pointer-events: auto;
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .hero-intro-avatar {

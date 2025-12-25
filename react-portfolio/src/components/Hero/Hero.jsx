@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import RingLettersLoader from "./RingLettersLoader";
 
 const LOADING_DURATION = 3500;
+
 const TypingText = ({ text, speed = 30, className = "" }) => {
   const [displayed, setDisplayed] = useState("");
 
@@ -13,16 +14,11 @@ const TypingText = ({ text, speed = 30, className = "" }) => {
     const type = () => {
       setDisplayed(text.slice(0, i + 1));
       i += 1;
-      if (i < text.length) {
-        frame = setTimeout(type, speed);
-      }
+      if (i < text.length) frame = setTimeout(type, speed);
     };
 
     type();
-
-    return () => {
-      clearTimeout(frame);
-    };
+    return () => clearTimeout(frame);
   }, [text, speed]);
 
   return <span className={className}>{displayed}</span>;
@@ -30,52 +26,41 @@ const TypingText = ({ text, speed = 30, className = "" }) => {
 
 const Hero = ({ showAvatarInNav }) => {
   const [introDone, setIntroDone] = useState(false);
-
-  //flip control 
   const [isFlipping, setIsFlipping] = useState(false);
-  const [showProfileImage, setShowProfileImage] = useState(false); 
+  const [showProfileImage, setShowProfileImage] = useState(false);
 
   useEffect(() => {
-    if (!introDone) {
-      document.documentElement.classList.add("intro-active");
+    document.documentElement.classList.add("intro-active");
 
-      const previousOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
+    const flipStart = setTimeout(() => setIsFlipping(true), 3500);
+    const swapImage = setTimeout(() => setShowProfileImage(true), 3800);
 
-      const flipStart = setTimeout(() => {
-        setIsFlipping(true);
-      }, 3500); 
+    const timer = setTimeout(() => {
+      setIntroDone(true);
+      document.documentElement.classList.add("intro-done");
+      document.documentElement.classList.remove("intro-active");
+    }, 4300);
 
-      const swapImage = setTimeout(() => {
-        setShowProfileImage(true);
-      }, 3800); 
-
-      const timer = setTimeout(() => {
-        setIntroDone(true);
-        document.body.style.overflow = previousOverflow || "";
-        document.documentElement.classList.add("intro-done");
-      }, 4300);
-
-      return () => {
-        clearTimeout(timer);
-        clearTimeout(flipStart);
-        clearTimeout(swapImage);
-        document.body.style.overflow = previousOverflow || "";
-      };
-    }
-  }, [introDone]);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(flipStart);
+      clearTimeout(swapImage);
+      document.documentElement.classList.remove("intro-active");
+    };
+  }, []);
 
   return (
     <>
       {/* Intro overlay */}
       <AnimatePresence>
-        {!introDone && !showAvatarInNav && (
+        {!introDone && (
           <motion.div
             className="hero-intro-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
+            aria-hidden="true"
           >
             <motion.div
               layoutId="profile-avatar"
@@ -104,7 +89,6 @@ const Hero = ({ showAvatarInNav }) => {
                 <div className="hero-loading-avatar">
                   <RingLettersLoader
                     size={260}
-                    text="Builder  Developer  Designer  Analyst  Innovator"
                     durationMs={LOADING_DURATION}
                     cloudSpread={1500}
                     wordsOuter="Problem-Solver Developer Analyst Architect"
@@ -112,13 +96,12 @@ const Hero = ({ showAvatarInNav }) => {
                     wordsInner="CODE BUILD CREATE"
                     rings={[
                       { count: 48, radius: 112, speed: 0.75, fontSize: 14, opacity: 0.95 },
-                      { count: 36, radius: 86,  speed: -0.52, fontSize: 12, opacity: 0.80 },
-                      { count: 24, radius: 60,  speed: 0.40, fontSize: 10, opacity: 0.65 },
+                      { count: 36, radius: 86, speed: -0.52, fontSize: 12, opacity: 0.8 },
+                      { count: 24, radius: 60, speed: 0.4, fontSize: 10, opacity: 0.65 },
                     ]}
                   />
                 </div>
               )}
-
             </motion.div>
 
             <div className="hero-loader-wrapper">
@@ -127,15 +110,10 @@ const Hero = ({ showAvatarInNav }) => {
                   className="hero-loader-bar-fill"
                   initial={{ width: "0%" }}
                   animate={{ width: "100%" }}
-                  transition={{
-                    duration: LOADING_DURATION / 1000,
-                    ease: "linear",
-                  }}
+                  transition={{ duration: LOADING_DURATION / 1000, ease: "linear" }}
                 />
               </div>
-              <p className="hero-loader-text">
-                Crafting the details...
-              </p>
+              <p className="hero-loader-text">Crafting the details...</p>
             </div>
           </motion.div>
         )}
@@ -170,10 +148,7 @@ const Hero = ({ showAvatarInNav }) => {
               transition={{ duration: 0.45, delay: 0.35 }}
             >
               {introDone && (
-                <TypingText
-                  text="IT undergraduate & Practical Problem Solver."
-                  speed={25}
-                />
+                <TypingText text="IT undergraduate & Practical Problem Solver." speed={25} />
               )}
             </motion.p>
 
@@ -217,11 +192,7 @@ const Hero = ({ showAvatarInNav }) => {
                 exit={{ opacity: 0, x: 40, scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
               >
-                <img
-                  src="/profile2.jpg"
-                  alt="Profile"
-                  className="hero-image"
-                />
+                <img src="/profile2.jpg" alt="Profile" className="hero-image" />
               </motion.div>
             )}
           </AnimatePresence>

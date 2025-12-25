@@ -10,7 +10,7 @@ import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
-  const [showAvatarInNav, setShowAvatarInNav] = useState(false);
+  const [showAvatarInNav, setShowAvatarInNav] =useState(() => window.scrollY > 220);
 
   useEffect(() => {
     const handleScroll = () => {
