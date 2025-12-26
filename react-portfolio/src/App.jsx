@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./index.css";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
@@ -9,18 +8,31 @@ import Projects from "./components/Projects/Projects";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 
+const TRIGGER_POINT = 220;
+
 const App = () => {
-  const [showAvatarInNav, setShowAvatarInNav] =useState(() => window.scrollY > 220);
+  const [showAvatarInNav, setShowAvatarInNav] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const triggerPoint = 220; 
-      setShowAvatarInNav(window.scrollY > triggerPoint);
+    let ticking = false;
+
+    const update = () => {
+      const y = window.scrollY || 0;
+      setShowAvatarInNav(y > TRIGGER_POINT);
+      ticking = false;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+
+    window.addEventListener("scroll", onScroll, { passive: true }); 
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
@@ -34,7 +46,7 @@ const App = () => {
         <Projects />
         <Contact />
       </main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 };

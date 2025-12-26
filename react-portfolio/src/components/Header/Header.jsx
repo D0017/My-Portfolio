@@ -14,6 +14,13 @@ const Header = ({ showAvatarInNav }) => {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   return (
     <header className="header">
       <nav className="nav">
@@ -47,8 +54,7 @@ const Header = ({ showAvatarInNav }) => {
           <span />
           <span />
         </button>
-        
-        {/* Links */}
+
         <ul className={`nav-links ${menuOpen ? "is-open" : ""}`}>
           <li><a href="#about" onClick={closeMenu}>About</a></li>
           <li><a href="#skills" onClick={closeMenu}>Skills</a></li>
