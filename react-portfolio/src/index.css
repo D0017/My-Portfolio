@@ -76,6 +76,8 @@ body {
   min-height: 100vh;
 }
 
+*, *::before, *::after { box-sizing: border-box; }
+
 img, svg, video, canvas {
   max-width: 100%;
   height: auto;

@@ -1,8 +1,8 @@
 .header {
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 50;
-
   backdrop-filter: blur(18px);
   background: transparent;
 
@@ -10,10 +10,10 @@
 }
 
 .nav {
+  width: 100%;
   max-width: 1100px;
   margin: 0 auto;
   padding: 0.9rem 1.5rem;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,6 +21,7 @@
 
 .nav-left {
   display: flex;
+  min-width: 0;
   align-items: center;
   gap: 0.85rem;
 }
@@ -28,6 +29,10 @@
 /* Logo */
 
 .logo {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-weight: 700;
   font-size: 1.05rem;
   letter-spacing: 0.08em;
@@ -148,11 +153,24 @@
 
 @media (max-width: 720px) {
   .nav {
+    padding: 0.8rem 1rem;
+    gap: 0.75;
     position: relative;
   }
 
   .nav-toggle {
+    flex: 0 0 auto;
     display: inline-flex;
+  }
+
+  .logo {
+    white-space: nowrap;      
+    max-width: calc(100vw - 42px - 40px - 2rem); 
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .nav-avatar-slot {
+    flex: 0 0 auto;
   }
 
   .nav-links {

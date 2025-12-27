@@ -1,31 +1,80 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import "./Header.css";
 import { motion, AnimatePresence } from "framer-motion";
 
+const MOBILE_BREAKPOINT = 720;
+
 const Header = ({ showAvatarInNav }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuId = useId();
+  const drawerRef = useRef(null);
+  const toggleBtnRef = useRef(null);
+
   const closeMenu = () => setMenuOpen(false);
+  const toggleMenu = () => setMenuOpen((v) => !v);
 
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth > 720) setMenuOpen(false);
+      if (window.innerWidth > MOBILE_BREAKPOINT) setMenuOpen(false);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    const body = document.body;
+    const root = document.documentElement;
+
+    if (menuOpen) {
+      const scrollbarWidth = window.innerWidth - root.clientWidth;
+      body.style.overflow = "hidden";
+      body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      body.style.overflow = "";
+      body.style.paddingRight = "";
+    }
+
     return () => {
-      document.body.style.overflow = "";
+      body.style.overflow = "";
+      body.style.paddingRight = "";
     };
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") closeMenu();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const onPointerDown = (e) => {
+      const drawer = drawerRef.current;
+      const toggle = toggleBtnRef.current;
+
+      if (drawer?.contains(e.target)) return;
+      if (toggle?.contains(e.target)) return;
+
+      closeMenu();
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [menuOpen]);
 
   return (
     <header className="header">
       <nav className="nav">
         <div className="nav-left">
-          <div className="logo">PRAVEEN DINUWARA</div>
+          <div className="logo" title="PRAVEEN DINUWARA">
+            PRAVEEN DINUWARA
+          </div>
 
           <div className="nav-avatar-slot">
             <AnimatePresence>
@@ -46,20 +95,44 @@ const Header = ({ showAvatarInNav }) => {
         </div>
 
         <button
+          ref={toggleBtnRef}
+          type="button"
           className={`nav-toggle ${menuOpen ? "is-open" : ""}`}
-          aria-label="Toggle navigation"
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
+          aria-controls={menuId}
+          onClick={toggleMenu}
         >
           <span />
           <span />
         </button>
 
-        <ul className={`nav-links ${menuOpen ? "is-open" : ""}`}>
-          <li><a href="#about" onClick={closeMenu}>About</a></li>
-          <li><a href="#skills" onClick={closeMenu}>Skills</a></li>
-          <li><a href="#projects" onClick={closeMenu}>Projects</a></li>
-          <li><a href="#contact" onClick={closeMenu}>Contact</a></li>
+        <ul
+          id={menuId}
+          ref={drawerRef}
+          className={`nav-links ${menuOpen ? "is-open" : ""}`}
+          aria-hidden={!menuOpen && window.innerWidth <= MOBILE_BREAKPOINT}
+        >
+          <li>
+            <a href="#about" onClick={closeMenu}>
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#skills" onClick={closeMenu}>
+              Skills
+            </a>
+          </li>
+          <li>
+            <a href="#projects" onClick={closeMenu}>
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="#contact" onClick={closeMenu}>
+              Contact
+            </a>
+          </li>
         </ul>
       </nav>
     </header>
