@@ -192,7 +192,7 @@ useEffect(() => {
               transition={{ duration: 0.45, delay: 0.35 }}
             >
               {introDone && (
-                <TypingText text="IT undergraduate & Practical Problem Solver." speed={25} />
+                <TypingText text="IT undergraduate exploring the intersection of technology and real-world impact." speed={25} />
               )}
             </motion.p>
 
@@ -231,10 +231,13 @@ useEffect(() => {
               <motion.div
                 layoutId="profile-avatar"
                 className="hero-avatar-wrapper"
-                initial={{ opacity: 0, x: 40, scale: 0.9 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 40, scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                initial={{ opacity: 0, x: 18 }}         
+                animate={{ opacity: 1, x: 0 }}         
+                exit={{ opacity: 0, x: 18 }}
+                transition={{
+                  duration: 0.18,                       
+                  ease: "easeOut",
+                }}
               >
               <img src={`${import.meta.env.BASE_URL}profile2.jpg`} alt="Profile" className="hero-image" />
               </motion.div>

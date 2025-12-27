@@ -9,9 +9,16 @@ const Header = ({ showAvatarInNav }) => {
   const menuId = useId();
   const drawerRef = useRef(null);
   const toggleBtnRef = useRef(null);
-
   const closeMenu = () => setMenuOpen(false);
   const toggleMenu = () => setMenuOpen((v) => !v);
+
+  const goTop = () => {
+  closeMenu(); 
+  const hero = document.getElementById("hero");
+  if (hero) hero.scrollIntoView({ behavior: "smooth", block: "start" });
+  else window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 
   useEffect(() => {
     const onResize = () => {
@@ -72,10 +79,14 @@ const Header = ({ showAvatarInNav }) => {
     <header className="header">
       <nav className="nav">
         <div className="nav-left">
-          <div className="logo" title="PRAVEEN DINUWARA">
+          <button
+            type="button"
+            className="logo logo-btn"
+            title="PRAVEEN DINUWARA"
+            onClick={goTop}
+          >
             PRAVEEN DINUWARA
-          </div>
-
+          </button>
           <div className="nav-avatar-slot">
             <AnimatePresence>
               {showAvatarInNav && (
