@@ -55,6 +55,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  
 }
 
 html {
@@ -73,6 +74,11 @@ body {
 
 #root {
   min-height: 100vh;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Links */
@@ -391,7 +397,7 @@ h3 {
 
 .hero-actions .btn-Contact {
   background: rgba(255, 255, 255, 0.06);
-  color: #e5e7eb;
+  color: #0b1f1a;
 
   border-color: rgba(255, 255, 255, 0.25);
 }
@@ -746,7 +752,7 @@ h3 {
 /* Intro section */
 
 .introduction {
-  height: 100vh;           
+  height: 100%;           
   width: 100%;
   background: #000000;     
   display: flex;
@@ -769,7 +775,7 @@ h3 {
 }
 
 .intro-banner {
-  height: 100vh;
+  height: 100%;
   background: #0a0a0a;
   padding: 4rem;
   color: #dcdcdc;
@@ -778,11 +784,10 @@ h3 {
   justify-content: space-between;
 }
 
-
 /* ---------- Skills ---------- */
 
 .skills-section {
-  width: 100vw;
+  width: 100%;
   padding: 4rem 0;
   background: #cad3c6;
   overflow-x: hidden;
@@ -798,7 +803,7 @@ h3 {
 }
 
 .skills-strip {
-  width: 100vw;
+  width: 100%;
   display: flex;
   gap: 14px;
   padding: 14px 14px; 
@@ -1997,3 +2002,5 @@ h3 {
 .footer-big-title span {
   display: inline-block;
 }
+
+

@@ -22,7 +22,7 @@ const About = () => {
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
-          whileHover={{ y: -6, scale: 1.1 }}
+          whileHover={{ y: -6, scale: 1.07 }}
           transition={{ type: "spring", stiffness: 220, damping: 20 }}
         >
           <div className="about2-bg" aria-hidden="true" />
