@@ -1982,19 +1982,46 @@ h3 {
   gap: 0.5rem;
 }
 
+.footer-hero-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+.footer-big-title {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: center;
+  gap: 0.06em;
+
+  color: #809784;
+  line-height: 1.1;
+
+  flex-wrap: wrap;
+  text-align: center;
+  word-break: break-word;
+}
+
+.footer-big-title span {
+  display: inline-block;
+}
+
+/* Bottom row */
 .footer-top {
   display: flex;
   justify-content: space-between;
   gap: 1.5rem;
   align-items: center;
   font-size: 0.85rem;
-}
-
-@media (max-width: 640px) {
-  .footer-top {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 .footer-label {
@@ -2029,8 +2056,7 @@ h3 {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: color 0.25s ease, border-color 0.25s ease,
-    transform 0.2s ease;
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
 .footer-top-btn::after {
@@ -2054,27 +2080,29 @@ h3 {
   transform: translateY(-1px);
 }
 
-.footer-hero-wrap {
-  display: flex;
-  justify-content: center;
+/* Responsive */
+@media (max-width: 640px) {
+  .footer-top {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .footer-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .footer-top-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem 1rem;
+  }
+
+  .footer-big-title {
+    font-size: clamp(2rem, 9vw, 3.2rem);
+    letter-spacing: 0.05em;
+    gap: 0.04em;
+    line-height: 1.05;
+  }
 }
-
-.footer-big-title {
-  margin: 0;
-  font-size: clamp(3rem, 10vw, 5.5rem);
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: center;
-  gap: 0.06em;
-  color: #809784;
-  line-height: 1.1;
-}
-
-.footer-big-title span {
-  display: inline-block;
-}
-
-
