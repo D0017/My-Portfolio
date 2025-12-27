@@ -29,25 +29,69 @@ const Hero = ({ showAvatarInNav }) => {
   const [isFlipping, setIsFlipping] = useState(false);
   const [showProfileImage, setShowProfileImage] = useState(false);
 
-  useEffect(() => {
-    document.documentElement.classList.add("intro-active");
+useEffect(() => {
+  const body = document.body;
+  const root = document.documentElement;
 
-    const flipStart = setTimeout(() => setIsFlipping(true), 3500);
-    const swapImage = setTimeout(() => setShowProfileImage(true), 3800);
+  window.scrollTo(0, 0);
 
-    const timer = setTimeout(() => {
-      setIntroDone(true);
-      document.documentElement.classList.add("intro-done");
-      document.documentElement.classList.remove("intro-active");
-    }, 4300);
+  const prev = {
+    overflow: body.style.overflow,
+    position: body.style.position,
+    top: body.style.top,
+    width: body.style.width,
+    paddingRight: body.style.paddingRight,
+    scrollBehavior: root.style.scrollBehavior,
+  };
 
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(flipStart);
-      clearTimeout(swapImage);
-      document.documentElement.classList.remove("intro-active");
-    };
-  }, []);
+  const scrollbarWidth = window.innerWidth - root.clientWidth;
+
+  root.style.scrollBehavior = "auto";
+
+  body.style.overflow = "hidden";
+  body.style.position = "fixed";
+  body.style.top = "0px";
+  body.style.width = "100%";
+  body.style.paddingRight = `${scrollbarWidth}px`;
+
+  root.classList.add("intro-active");
+
+  const flipStart = setTimeout(() => setIsFlipping(true), 3500);
+  const swapImage = setTimeout(() => setShowProfileImage(true), 3800);
+
+  const timer = setTimeout(() => {
+    setIntroDone(true);
+
+    root.classList.add("intro-done");
+    root.classList.remove("intro-active");
+
+    body.style.overflow = prev.overflow;
+    body.style.position = prev.position;
+    body.style.top = prev.top;
+    body.style.width = prev.width;
+    body.style.paddingRight = prev.paddingRight;
+    root.style.scrollBehavior = prev.scrollBehavior;
+
+    window.scrollTo(0, 0);
+  }, 4300);
+
+  return () => {
+    clearTimeout(timer);
+    clearTimeout(flipStart);
+    clearTimeout(swapImage);
+
+    root.classList.remove("intro-active");
+
+    body.style.overflow = prev.overflow;
+    body.style.position = prev.position;
+    body.style.top = prev.top;
+    body.style.width = prev.width;
+    body.style.paddingRight = prev.paddingRight;
+    root.style.scrollBehavior = prev.scrollBehavior;
+  };
+}, []);
+
+
 
   return (
     <>

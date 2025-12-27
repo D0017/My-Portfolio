@@ -84,10 +84,19 @@ const Header = ({ showAvatarInNav }) => {
                   src={`${import.meta.env.BASE_URL}profile2.jpg`}
                   alt="Profile"
                   className="nav-avatar-img"
-                  initial={{ opacity: 0, scale: 0.4, rotate: 4 }}
-                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                  exit={{ opacity: 0, scale: 0.6, rotate: -4 }}
-                  transition={{ type: "spring", stiffness: 520, damping: 20 }}
+                  initial={false}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 0,
+                  }}
+                  exit={{
+                    opacity: 0,
+                  }}
+                  transition={{
+                    duration: window.innerWidth <= MOBILE_BREAKPOINT ? 0.25 : 0.45,
+                    ease: "easeOut",
+                  }}
                 />
               )}
             </AnimatePresence>

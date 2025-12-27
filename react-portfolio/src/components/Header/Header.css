@@ -5,7 +5,8 @@
   z-index: 50;
   backdrop-filter: blur(18px);
   background: transparent;
-
+  will-change: transform;
+  backface-visibility: hidden;
   border-bottom: 1px solid var(--border-subtle);
 }
 
