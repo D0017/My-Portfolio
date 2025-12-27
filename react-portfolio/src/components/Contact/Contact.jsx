@@ -1,18 +1,31 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { isValidPhoneNumber } from "react-phone-number-input";
+
 
 const Contact = () => {
   const formRef = useRef(null);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState(null); 
   const [budget, setBudget] = useState("50-100");
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSending(true);
     setStatus(null);
 
+    if (!phone || !isValidPhoneNumber(phone)) {
+      setPhoneError("Please enter a valid phone number");
+      return;
+    }
+
+  setPhoneError(null);
+      
     try {
       await emailjs.sendForm(
         "service_w7almzm",  
@@ -23,6 +36,7 @@ const Contact = () => {
       setSending(false);
       setStatus("success");
       formRef.current.reset();
+      setPhone("");
       setBudget("50-100");
     } catch (err) {
       console.error(err);
@@ -117,10 +131,22 @@ const Contact = () => {
               <input id="name" name="user_name" type="text" required />
             </div>
 
-            <div className="form-row">
-              <label htmlFor="phone">PHONE*</label>
-              <input id="phone" name="user_phone" type="tel" required />
-            </div>
+        <div className="form-row">
+          <label>PHONE*</label>
+
+          <PhoneInput
+            international
+            defaultCountry="LK"
+            value={phone}
+            onChange={setPhone}
+            className="phone-input"
+          />
+          <input type="hidden" name="user_phone" value={phone || ""} />
+
+          {phoneError && (
+            <p className="form-error">{phoneError}</p>
+          )}
+        </div>
 
             <div className="form-row">
               <label htmlFor="email">YOUR EMAIL*</label>

@@ -1895,6 +1895,78 @@ h3 {
   color: #dc2626;
 }
 
+.phone-input {
+  margin-top: 6px;
+}
+
+.phone-input input {
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  color: inherit;
+}
+
+.form-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .contact-section {
+    padding: 4rem 0;
+  }
+
+  .contact-container {
+    gap: 2.5rem;
+  }
+
+  .contact-info-panel {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 3.25rem 0;
+  }
+
+  .contact-email {
+    margin-top: 1.25rem;
+    word-break: break-word; 
+  }
+
+  .contact-social-buttons {
+    gap: 0.9rem;
+  }
+
+  .social-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+  }
+
+  .budget-options {
+    gap: 1rem;
+  }
+
+  .contact-submit-btn {
+    width: 100%;
+    justify-content: center;
+    align-self: stretch;
+    padding: 1rem 1.2rem;
+  }
+
+  .phone-input input {
+    font-size: 16px;
+  }
+}
+
+
 /* Footer */
 
 .footer {
