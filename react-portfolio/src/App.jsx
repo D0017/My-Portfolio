@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Header from "./components/Header/Header";
-import Hero from "./components/Hero/Hero";
-import About from "./components/About/About";
-import Intro from "./components/Intro";
-import Skills from "./components/Skills/Skills";
-import Projects from "./components/Projects/Projects";
-import Contact from "./components/Contact/Contact";
-import Footer from "./components/Footer/Footer";
+import React, { useEffect, useState, lazy, Suspense } from "react";
+
+const Header = lazy(() => import("./components/Header/Header"));
+const Hero = lazy(() => import("./components/Hero/Hero"));
+const About = lazy(() => import("./components/About/About"));
+const Intro = lazy(() => import("./components/Intro"));
+const Skills = lazy(() => import("./components/Skills/Skills"));
+const Projects = lazy(() => import("./components/Projects/Projects"));
+const Contact = lazy(() => import("./components/Contact/Contact"));
+const Footer = lazy(() => import("./components/Footer/Footer"));
 
 const TRIGGER_POINT = 220;
 
@@ -30,13 +31,12 @@ const App = () => {
     };
 
     update();
-
-    window.addEventListener("scroll", onScroll, { passive: true }); 
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <>
+    <Suspense fallback={null}>
       <Header showAvatarInNav={showAvatarInNav} />
       <main>
         <Hero showAvatarInNav={showAvatarInNav} />
@@ -47,7 +47,7 @@ const App = () => {
         <Contact />
       </main>
       <Footer />
-    </>
+    </Suspense>
   );
 };
 
