@@ -59,9 +59,9 @@ const About = () => {
 
             <div className="about2-panel">
 
-              <div className="about2-card flip-card" style={{
-                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-1.jpg)`
-              }}
+              <div className="about2-card flip-card" 
+                data-title="WHAT I DO"
+                style={{ "--accent": "rgba(194,210,191,0.22)", "--dot": "20px", "--line": "22px" }}
               >
                 <div className="flip-clip">
                 <div className="flip-inner">
@@ -79,9 +79,9 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="about2-card flip-card" style={{
-                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-2.jpg)`
-              }}
+              <div className="about2-card flip-card" 
+                data-title="TECH FOCUS"
+                style={{ "--accent": "rgba(194,210,191,0.22)", "--dot": "16px", "--line": "22px" }}
               >
                 <div className="flip-clip">
                 <div className="flip-inner">
@@ -100,9 +100,9 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="about2-card flip-card" style={{
-                "--bg": `url(${import.meta.env.BASE_URL}assets/images/about-card-3.jpg)`
-              }}
+              <div className="about2-card flip-card"
+                data-title="HOW I WORK"
+                style={{ "--accent": "rgba(194,210,191,0.22)", "--dot": "22px", "--line": "22px" }}
               >
                 <div className="flip-clip">
                 <div className="flip-inner">
