@@ -1,14 +1,13 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
 import Intro from "./components/Intro";
 import Skills from "./components/Skills/Skills";
+import Projects from "./components/Projects/Projects";
+import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import RenderOnView from "./components/RenderOnView";
-
-const About = lazy(() => import("./components/About/About"));
-const Projects = lazy(() => import("./components/Projects/Projects"));
-const Contact = lazy(() => import("./components/Contact/Contact"));
 
 const TRIGGER_POINT = 220;
 
@@ -48,28 +47,23 @@ const App = () => {
       <main>
         <Hero showAvatarInNav={showAvatarInNav} />
 
-        <RenderOnView rootMargin="900px" minHeight={600}>
-          <Suspense fallback={<SectionLoader label="About" />}>
-            <About />
+        <About />
+
+        <RenderOnView id="intro" rootMargin="900px" minHeight={600}>
+          <Suspense fallback={<SectionLoader label="Intro" />}>
+            <Intro />
           </Suspense>
         </RenderOnView>
 
-        <Intro />
         <Skills />
-
-        <RenderOnView rootMargin="900px" minHeight={700}>
-          <Suspense fallback={<SectionLoader label="Projects" />}>
-            <Projects />
-          </Suspense>
-        </RenderOnView>
-
-        <RenderOnView rootMargin="900px" minHeight={600}>
-          <Suspense fallback={<SectionLoader label="Contact" />}>
-            <Contact />
-          </Suspense>
-        </RenderOnView>
+        <Projects />
+        <Contact />
+        
       </main>
-      <Footer />
+
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </>
   );
 };

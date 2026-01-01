@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const RenderOnView = ({ children, rootMargin = "700px", minHeight = 300 }) => {
+const RenderOnView = ({
+  children,
+  rootMargin = "700px",
+  minHeight = 300,
+  id,
+  as: Component = "div",
+}) => {
   const ref = useRef(null);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || show) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -20,12 +26,16 @@ const RenderOnView = ({ children, rootMargin = "700px", minHeight = 300 }) => {
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [rootMargin]);
+  }, [rootMargin, show]);
 
   return (
-    <div ref={ref} style={{ minHeight: show ? undefined : minHeight }}>
+    <Component
+      id={id}
+      ref={ref}
+      style={{ minHeight: show ? undefined : minHeight }}
+    >
       {show ? children : null}
-    </div>
+    </Component>
   );
 };
 
