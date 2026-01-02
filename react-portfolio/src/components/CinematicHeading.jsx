@@ -6,21 +6,22 @@ const lineVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.35,       
+      delay: i * 0.35,
       duration: 0.9,
-      ease: [0.16, 1, 0.3, 1] 
-    }
+      ease: [0.16, 1, 0.3, 1],
+    },
   }),
 };
 
 const CinematicHeading = ({ text }) => {
-  const lines = text.split("\n"); 
+  const lines = text.split("\n");
 
   return (
     <div className="intro-heading">
       {lines.map((line, index) => (
-        <motion.div
+        <motion.p
           key={index}
+          className="intro-line"
           custom={index}
           initial="hidden"
           whileInView="visible"
@@ -28,7 +29,7 @@ const CinematicHeading = ({ text }) => {
           variants={lineVariants}
         >
           {line}
-        </motion.div>
+        </motion.p>
       ))}
     </div>
   );
