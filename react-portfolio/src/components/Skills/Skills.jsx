@@ -1,45 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { skills } from "../../data/skills";
 import AnimatedTitle from "../AnimatedTitle";
 import TopicFlowOverlay from "./TopicFlowOverlay";
 
 const ICONS = {
-  // Frontend
   html: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
   css: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
-  javascript: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  javascript:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
   react: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  bootstrap: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
-  tailwind: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+  bootstrap:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+  tailwind:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
 
-  // Backend
   node: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  express: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+  express:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
   php: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
   rest: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
 
-  // Mobile
-  kotlin: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
-  android: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
+  kotlin:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg",
+  android:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
   mvvm: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/android/android-original.svg",
   room: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg",
 
-  // Databases
-  mongodb: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+  mongodb:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
   mysql: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
 
-  // Tools
   git: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  github: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  vscode: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
-  postman: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-  figma: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+  github:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+  vscode:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
+  postman:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
+  figma:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
 
-  // Concepts
   oop: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
   api: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg",
-  responsive: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+  responsive:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
   agile: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
 };
 
@@ -47,19 +53,64 @@ const iconsFor = (category, items) => {
   const picked = [];
   for (const raw of items) {
     const key = raw.toLowerCase().replace(/[^a-z]/g, "");
-
     const foundKey = Object.keys(ICONS).find((k) => key.includes(k));
     if (foundKey) picked.push(ICONS[foundKey]);
-
-    if (picked.length >= 8) break; 
+    if (picked.length >= 8) break;
   }
-
   return [...new Set(picked)];
 };
 
+const mod = (n, m) => ((n % m) + m) % m;
+
 const Skills = () => {
-  const entries = Object.entries(skills);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const entries = useMemo(() => Object.entries(skills), []);
+  const total = entries.length;
+  const [activeIndex, setActiveIndex] = useState(() => Math.floor(total / 2));
+  const move = (dir) => setActiveIndex((i) => mod(i + dir, total));
+
+  // keyboard navigation
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "ArrowRight") move(1);
+      if (e.key === "ArrowLeft") move(-1);
+      if (e.key === "Home") setActiveIndex(0);
+      if (e.key === "End") setActiveIndex(total - 1);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [total]);
+
+  //  circular distance
+  const circularOffset = (index) => {
+    const raw = index - activeIndex;
+    const half = Math.floor(total / 2);
+    if (raw > half) return raw - total;
+    if (raw < -half) return raw + total;
+    return raw;
+  };
+
+  // V-shape slot 
+  const slot = (offset) => {
+    const abs = Math.abs(offset);
+
+    const x = offset * 260;
+    const y = abs * 130;
+
+    const scale = 1 - abs * 0.12;
+    const rotate = offset * -6;
+
+    const opacity = abs > 3 ? 0 : 1 - abs * 0.18;
+    const blur = abs === 0 ? 0 : Math.min(abs * 0.8, 2.4);
+
+    return { x, y, scale, rotate, opacity, blur, zIndex: 20 - abs };
+  };
+
+  // Drag
+  const handleDragEnd = (info) => {
+    const threshold = 90; 
+    if (info.offset.x <= -threshold) move(1);
+    if (info.offset.x >= threshold) move(-1);
+  };
 
   return (
     <motion.section
@@ -74,36 +125,83 @@ const Skills = () => {
         <AnimatedTitle text="SKILLS" />
       </div>
 
-      <div className="skills-strip">
-        {entries.map(([category, items], index) => {
-          const isActive = index === activeIndex;
-          const prettyTitle =
-            category.charAt(0).toUpperCase() + category.slice(1);
+      <div className="skills-stage-wrap">
+        <div className="skills-hint">
+          <span>Adaptability</span>
+          <span className="dot" />
+          <span>Creativity</span>
+          <span className="dot" />
+          <span>Collaboration</span>
+        </div>
 
-          return (
-            <motion.div
-              key={category}
-              className={`skills-column ${isActive ? "is-active" : ""}`}
-              onMouseEnter={() => setActiveIndex(index)}
-              layout
-            >
-              <div className="skills-column-header">
-                <TopicFlowOverlay
-                  title={prettyTitle}
-                  icons={iconsFor(category, items)}
-                  active={isActive}
-                />
-                 <h3 className="skills-title">{prettyTitle}</h3>
+        <div className="skills-stage">
+          {entries.map(([category, items], index) => {
+            const offset = circularOffset(index);
+            const s = slot(offset);
+            const isActive = offset === 0;
+
+            const prettyTitle =
+              category.charAt(0).toUpperCase() + category.slice(1);
+
+            return (
+              <div
+                key={category}
+                className="skills-card-anchor"
+                style={{ zIndex: s.zIndex }}
+              >
+                <motion.article
+                  className={`skills-card ${isActive ? "is-active" : ""}`}
+                  animate={{
+                    x: s.x,
+                    y: s.y,
+                    scale: s.scale,
+                    rotate: s.rotate,
+                    opacity: s.opacity,
+                    filter: `blur(${s.blur}px)`,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 26,
+                    mass: 0.9,
+                  }}
+                  onClick={() => setActiveIndex(index)}
+                  onFocus={() => setActiveIndex(index)}
+                  tabIndex={0}
+
+                  drag={isActive ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.12}
+                  onDragEnd={(e, info) => handleDragEnd(info)}
+                >
+                  <div className="skills-card-header">
+                    <TopicFlowOverlay
+                      title={prettyTitle}
+                      icons={iconsFor(category, items)}
+                      active={isActive}
+                    />
+                    <h3 className="skills-title">{prettyTitle}</h3>
+                  </div>
+
+                  <ul className="skills-list">
+                    {items.map((skill) => (
+                      <li key={skill}>{skill}</li>
+                    ))}
+                  </ul>
+                </motion.article>
               </div>
+            );
+          })}
+        </div>
 
-              <ul className="skills-list">
-                {items.map((skill) => (
-                  <li key={skill}>{skill}</li>
-                ))}
-              </ul>
-            </motion.div>
-          );
-        })}
+        <div className="skills-controls">
+          <button className="skills-btn" onClick={() => move(-1)} aria-label="Previous">
+            ← 
+          </button>
+          <button className="skills-btn" onClick={() => move(1)} aria-label="Next">
+            →
+          </button>
+        </div>
       </div>
     </motion.section>
   );
