@@ -930,7 +930,6 @@ h3 {
 
 /* ---------- Skills ---------- */
 
-
 .skills-section {
   width: 100%;
   padding: 4rem 0 5rem;
@@ -955,9 +954,12 @@ h3 {
 
 /* hint */
 .skills-hint {
+  flex-wrap: wrap;
   display: flex;
+  text-align: center;
   align-items: center;
   justify-content: center;
+  row-gap: 0.4rem;
   gap: 0.65rem;
   opacity: 0.7;
   font-size: 0.8rem;
@@ -975,7 +977,7 @@ h3 {
 /* stage */
 .skills-stage {
   position: relative;
-  height: 520px;
+  height: min(520px, 70dvh);
   border-radius: 28px;
   overflow: hidden;
 
@@ -1180,6 +1182,7 @@ h3 {
 /* controls */
 .skills-controls {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0.9rem;
@@ -1194,15 +1197,59 @@ h3 {
   box-shadow: 0 10px 26px rgba(27, 31, 23, 0.08);
 }
 
-/* mobile */
+/* Mobile */
 @media (max-width: 768px) {
-  .skills-stage { height: 520px; }
-  .skills-card-anchor { width: min(380px, 90vw); top: 88px; }
-  .skills-card { padding: 1.85rem 1.6rem; }
+  .skills-section {
+    padding: 3.2rem 0 4rem;
+  }
+  .skills-stage-wrap {
+    padding: 0 0.9rem;
+  }
+  .skills-stage {
+    height: min(520px, 68dvh);
+    border-radius: 22px;
+  }
+  .skills-card-anchor {
+    top: 72px;                
+    width: min(360px, 92vw);   
+  }
+  .skills-card {
+    padding: 1.55rem 1.25rem; 
+    border-radius: 18px;
+  }
+  .skills-card-header {
+    padding: 0.85rem 0.85rem;
+    border-radius: 14px;
+  }
+  .topic-marquee {
+    height: 40px;
+  }
+  .skills-title {
+    font-size: clamp(1.15rem, 4.8vw, 1.55rem);
+  }
+  .skills-list {
+    gap: 8px;
+    margin-top: 1rem;
+  }
+  .skills-list li {
+    font-size: 0.78rem;
+    padding: 0.48rem 0.65rem;
+  }
 }
 
-
-
+/*  small screens */
+@media (max-width: 380px) {
+  .skills-card-anchor {
+    width: 94vw;
+  }
+  .skills-card {
+    padding: 1.35rem 1.1rem;
+  }
+  .skills-hint {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+}
 
 
 /* ---------- Projects ---------- */
@@ -1220,7 +1267,6 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-
 
 .poster-wrapper {
   position: relative;
@@ -1280,7 +1326,6 @@ h3 {
   grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
   gap: 1.6rem;
 }
-
 
 .poster-content {
   display: flex;
@@ -1385,8 +1430,7 @@ h3 {
   font-size: 0.82rem;
   padding: 0.5rem 1.25rem;
   border-radius: 999px;
-  text-decoration: none;
-  
+  text-decoration: none; 
 }
 
 .poster-btn--primary {
@@ -1397,7 +1441,6 @@ h3 {
   cursor: pointer;
   transition: background 0.3s ease-in;
 }
-
 
 .poster-btn--ghost {
   border: none;
@@ -1596,7 +1639,6 @@ h3 {
   .poster-card {
     grid-template-columns: minmax(0, 1fr);
   }
-
   .poster-visual {
     grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   }
@@ -1606,11 +1648,9 @@ h3 {
   .poster-card {
     padding: 1.4rem 1.2rem;
   }
-
   .poster-wrapper {
     margin-top: 2rem;
   }
-
   .poster-visual {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1777,7 +1817,6 @@ h3 {
 .linkedin-btn:hover::before {
   box-shadow: inset 0 0 0 10em #0077b5;
 }
-
 
 .contact-address {
   font-size: 0.9rem;

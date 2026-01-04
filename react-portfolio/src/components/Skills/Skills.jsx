@@ -65,6 +65,7 @@ const mod = (n, m) => ((n % m) + m) % m;
 const Skills = () => {
   const entries = useMemo(() => Object.entries(skills), []);
   const total = entries.length;
+
   const [activeIndex, setActiveIndex] = useState(() => Math.floor(total / 2));
   const move = (dir) => setActiveIndex((i) => mod(i + dir, total));
 
@@ -80,7 +81,7 @@ const Skills = () => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [total]);
 
-  //  circular distance
+  // circular distance
   const circularOffset = (index) => {
     const raw = index - activeIndex;
     const half = Math.floor(total / 2);
@@ -89,25 +90,53 @@ const Skills = () => {
     return raw;
   };
 
-  // V-shape slot 
+  // Responsive 
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(max-width: 768px)").matches : false
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener?.("change", onChange);
+    return () => mq.removeEventListener?.("change", onChange);
+  }, []);
+
   const slot = (offset) => {
     const abs = Math.abs(offset);
 
-    const x = offset * 260;
-    const y = abs * 130;
+    let xStep = 260;
+    let yStep = 130;
+    let scaleDrop = 0.12;
+    let rotateStep = -6;
+    let maxVisible = 3; 
 
-    const scale = 1 - abs * 0.12;
-    const rotate = offset * -6;
+    if (isMobile) {
+      xStep = 150;    
+      yStep = 68;    
+      scaleDrop = 0.10;
+      rotateStep = -4;
+      maxVisible = 2; 
+    }
 
-    const opacity = abs > 3 ? 0 : 1 - abs * 0.18;
-    const blur = abs === 0 ? 0 : Math.min(abs * 0.8, 2.4);
+    const x = offset * xStep;
+    const y = abs * yStep;
+    const scale = 1 - abs * scaleDrop;
+    const rotate = offset * rotateStep;
+
+    const opacity =
+      abs > maxVisible ? 0 : 1 - abs * (isMobile ? 0.22 : 0.18);
+
+    const blur =
+      abs === 0 ? 0 : Math.min(abs * (isMobile ? 0.6 : 0.8), isMobile ? 1.4 : 2.4);
 
     return { x, y, scale, rotate, opacity, blur, zIndex: 20 - abs };
   };
 
-  // Drag
+  // drag
   const handleDragEnd = (info) => {
-    const threshold = 90; 
+    const threshold = isMobile ? 55 : 90;
     if (info.offset.x <= -threshold) move(1);
     if (info.offset.x >= threshold) move(-1);
   };
@@ -148,6 +177,7 @@ const Skills = () => {
                 key={category}
                 className="skills-card-anchor"
                 style={{ zIndex: s.zIndex }}
+                aria-hidden={s.opacity === 0}
               >
                 <motion.article
                   className={`skills-card ${isActive ? "is-active" : ""}`}
@@ -168,7 +198,6 @@ const Skills = () => {
                   onClick={() => setActiveIndex(index)}
                   onFocus={() => setActiveIndex(index)}
                   tabIndex={0}
-
                   drag={isActive ? "x" : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.12}
@@ -196,7 +225,7 @@ const Skills = () => {
 
         <div className="skills-controls">
           <button className="skills-btn" onClick={() => move(-1)} aria-label="Previous">
-            ← 
+            ←
           </button>
           <button className="skills-btn" onClick={() => move(1)} aria-label="Next">
             →
