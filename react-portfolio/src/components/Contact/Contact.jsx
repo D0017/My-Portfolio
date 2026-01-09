@@ -163,7 +163,7 @@ const Contact = () => {
               />
             </div>
 
-            <div className="form-row budget-row">
+         {/*   <div className="form-row budget-row">
               <span className="budget-label">PROJECT BUDGET (USD)</span>
               <div className="budget-options">
                 <button
@@ -205,7 +205,7 @@ const Contact = () => {
                 name="project_budget"
                 value={budget}
               />
-            </div>
+            </div>  */}
 
             <button
               type="submit"

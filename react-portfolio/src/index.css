@@ -1877,7 +1877,7 @@ h3 {
   resize: vertical;
 }
 
-/* Budget selector */
+/* Budget selector 
 
 .budget-row {
   margin-top: 0.5rem;
@@ -1911,13 +1911,14 @@ h3 {
 .budget-option.active {
   color: #111827;
   font-weight: 600;
-}
+}   
+*/
 
 /* Submit button */
 
 .contact-submit-btn {
   margin-top: 2.25rem;
-  align-self: flex-start;
+  align-self: center;
   background: transparent;
   border: 1px solid #111827;
   padding: 0.9rem 2.6rem;
