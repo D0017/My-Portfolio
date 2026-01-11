@@ -163,7 +163,15 @@ const Skills = () => {
           <span>Collaboration</span>
         </div>
 
-        <div className="skills-stage">
+        <motion.div
+                  className="skills-stage"
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  whileHover={{ y: -5, scale: 1.01 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                > 
+        
           {entries.map(([category, items], index) => {
             const offset = circularOffset(index);
             const s = slot(offset);
@@ -221,7 +229,7 @@ const Skills = () => {
               </div>
             );
           })}
-        </div>
+        </motion.div>
 
         <div className="skills-controls">
           <button className="skills-btn" onClick={() => move(-1)} aria-label="Previous">

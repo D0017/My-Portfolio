@@ -19,9 +19,10 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Pink Aura Salon & Spa Management System",
+    title: "Pink Aura Salon Management System",
     type: "Web App",
     stackLabel: "MERN Stack (Full-Stack)",
+    role: "Led the salon management system project, owning the product vision and user role management.",
     description:
       "Full-stack salon management platform with appointment scheduling, staff management, product inventory, and  AI-Powered Chat Bot.",
     technologies: ["MongoDB", "Express", "React", "Node.js", "RESTful APIs"],
