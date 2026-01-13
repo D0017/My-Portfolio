@@ -29,7 +29,7 @@ export default function RingLettersLoader({
   wordsOuter = "Futurist · Designer · Developer · Architect",
   wordsMid = "PORTFOLIO · UI · UX",
   wordsInner = "CODE · BUILD · CREATE",
-
+  holdMs = 900,
   durationMs = 3500,
   cloudSpread = 1500, 
   alphabet = DEFAULT_ALPHABET,
@@ -93,26 +93,32 @@ export default function RingLettersLoader({
         settleDelay,
       };
     });
-  }, [slots.length]);
+  }, [slots, cloudSpread, alphabet]);
 
   const nodesRef = useRef([]);
   useEffect(() => {
     nodesRef.current = nodesRef.current.slice(0, particles.length);
   }, [particles.length]);
 
-  useEffect(() => {
+    useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
 
     const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const totalMs = durationMs + holdMs;
 
     const loop = (t) => {
       if (!startRef.current) startRef.current = t;
+
       const elapsed = t - startRef.current;
       const time = elapsed / 1000;
 
       const p = Math.min(1, elapsed / durationMs);
-      const ringRot = rings.map((r) => time * r.speed);
+
+      const rotElapsed = Math.min(elapsed, totalMs);
+      const rotTime = rotElapsed / 1000;
+
+      const ringRot = rings.map((r) => rotTime * r.speed);
 
       const cx = size / 2;
       const cy = size / 2;
@@ -130,7 +136,6 @@ export default function RingLettersLoader({
         );
         const e = easeOutCubic(local);
 
-        // cloud drift
         const cloudX =
           pt.x +
           Math.cos(pt.driftA + time * pt.spin) * 18 +
@@ -149,7 +154,7 @@ export default function RingLettersLoader({
         const ty = Math.sin(ta) * radius;
         const trot = ta + Math.PI / 2;
 
-        // interpolate cloud -> ring
+        // cloud -> ring
         const x = cloudX + (tx - cloudX) * e;
         const y = cloudY + (ty - cloudY) * e;
         const rot = pt.rot + (trot - pt.rot) * e;
@@ -157,7 +162,7 @@ export default function RingLettersLoader({
         // target char for this slot
         const targetChar = targetsByRing[pt.ringIndex]?.[pt.i] ?? " ";
 
-        //  lock once settled
+        // lock once settled
         if (!pt.locked) {
           if (local >= 0.985) {
             pt.locked = true;
@@ -173,24 +178,28 @@ export default function RingLettersLoader({
         } else {
           if (el.textContent !== targetChar) el.textContent = targetChar;
         }
-
-        // opacity
         const op = (0.12 + e * pt.maxOpacity).toFixed(3);
 
         el.style.opacity = op;
         el.style.transform = `translate(${cx + x}px, ${cy + y}px) rotate(${rot}rad)`;
+      }
+      // stop after settle + hold 
+      if (elapsed >= totalMs) {
+        rafRef.current = null;
+        return;
       }
 
       rafRef.current = requestAnimationFrame(loop);
     };
 
     rafRef.current = requestAnimationFrame(loop);
+
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
       startRef.current = 0;
     };
-  }, [alphabet, durationMs, particles, rings, size, targetsByRing]);
+  }, [alphabet, durationMs, holdMs, particles, rings, size, targetsByRing]);
 
   return (
     <div className={`rll3 ${className}`} style={{ ["--rll3-size"]: `${size}px` }}>

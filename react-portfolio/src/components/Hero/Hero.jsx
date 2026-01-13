@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import RingLettersLoader from "./RingLettersLoader";
 
-const LOADING_DURATION = 3500;
+const LOADER_SETTLE = 3500;
+const LOADER_HOLD = 900;  
+const LOADING_DURATION = LOADER_SETTLE + LOADER_HOLD;
 
 const TypingText = ({ text, speed = 30, className = "" }) => {
   const [displayed, setDisplayed] = useState("");
@@ -56,8 +58,8 @@ useEffect(() => {
 
   root.classList.add("intro-active");
 
-  const flipStart = setTimeout(() => setIsFlipping(true), 3500);
-  const swapImage = setTimeout(() => setShowProfileImage(true), 3800);
+  const flipStart = setTimeout(() => setIsFlipping(true), LOADING_DURATION);
+  const swapImage = setTimeout(() => setShowProfileImage(true), LOADING_DURATION + 300);
 
   const timer = setTimeout(() => {
     setIntroDone(true);
@@ -73,7 +75,7 @@ useEffect(() => {
     root.style.scrollBehavior = prev.scrollBehavior;
 
     window.scrollTo(0, 0);
-  }, 4300);
+  }, LOADING_DURATION + 800);
 
   return () => {
     clearTimeout(timer);
@@ -133,7 +135,8 @@ useEffect(() => {
                 <div className="hero-loading-avatar">
                   <RingLettersLoader
                     size={260}
-                    durationMs={LOADING_DURATION}
+                    durationMs={LOADER_SETTLE}
+                    holdMs={LOADER_HOLD}
                     cloudSpread={1500}
                     wordsOuter="Problem-Solver Developer Analyst Architect"
                     wordsMid="PORTFOLIO UI UX"
