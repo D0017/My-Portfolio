@@ -6,7 +6,7 @@ export const projects = [
     stackLabel: "Spring Boot + React",
     role: "Led the project, owning the authentication, OAuth integration, role management, and the notification system.",
     description:
-      "A full-stack Smart Campus Operations Hub developed for university management. The system supports facility booking, maintenance ticketing, and real-time notifications with role-based access control. As the team lead (Member 4), I implemented authentication, OAuth integration, role management, and the notification system.",
+      "A full-stack Smart Campus Operations Hub developed for university management. The system supports facility booking, maintenance ticketing, and real-time notifications with role-based access control.",
     technologies: [
       "Spring Boot",
       "React (Vite)",
