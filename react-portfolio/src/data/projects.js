@@ -1,21 +1,34 @@
 export const projects = [
   {
     id: 1,
-    title: "Daily Bloom – Wellness Tracker App",
-    type: "Mobile App",
-    stackLabel: "Android (Kotlin)",
+    title: "CampusOps Hub – Smart Campus Operations System",
+    type: "Full Stack Web Application",
+    stackLabel: "Spring Boot + React",
+    role: "Led the project, owning the authentication, OAuth integration, role management, and the notification system.",
     description:
-      "Android wellness tracker built with Kotlin. Features habit tracking, mood logging, hydration reminders, and data visualization using charts.",
-    technologies: ["Kotlin", "Android Studio", "Room DB", "ViewModel", "LiveData"],
-    highlights: [
-      "MVVM architecture with clean separation of concerns",
-      "Local persistence with Room and custom DAOs",
-      "Notification scheduling for reminders"
+      "A full-stack Smart Campus Operations Hub developed for university management. The system supports facility booking, maintenance ticketing, and real-time notifications with role-based access control. As the team lead (Member 4), I implemented authentication, OAuth integration, role management, and the notification system.",
+    technologies: [
+      "Spring Boot",
+      "React (Vite)",
+      "MySQL",
+      "Spring Security",
+      "OAuth 2.0 (Google)",
+      "JPA / Hibernate",
+      "Tailwind CSS",
+      "GitHub Actions"
     ],
-    image: `${import.meta.env.BASE_URL}assets/images/Daily BLOOM.png`,
-    github: "https://github.com/D0017/DailyBloom",
+    highlights: [
+      "Led the team and coordinated full project development",
+      "Implemented OAuth 2.0 login and secure role-based access (USER, ADMIN, TECHNICIAN)",
+      "Developed notification system for bookings, tickets, and system events",
+      "Designed protected routes and backend security using Spring Security",
+      "Integrated CI workflow using GitHub Actions for build and testing",
+      "Ensured clean REST API design and modular architecture"
+    ],
+    image: `${import.meta.env.BASE_URL}assets/images/CampusOps.png`,
+    github: "https://github.com/D0017/it3030-paf-2026-smart-campus-group79",
     demo: null,
-    featured: false
+    featured: true
   },
   {
     id: 2,
@@ -65,5 +78,24 @@ export const projects = [
     demo: null,
     featured: true
   },
+
+  {
+    id: 4,
+    title: "Daily Bloom – Wellness Tracker App",
+    type: "Mobile App",
+    stackLabel: "Android (Kotlin)",
+    description:
+      "Android wellness tracker built with Kotlin. Features habit tracking, mood logging, hydration reminders, and data visualization using charts.",
+    technologies: ["Kotlin", "Android Studio", "Room DB", "ViewModel", "LiveData"],
+    highlights: [
+      "MVVM architecture with clean separation of concerns",
+      "Local persistence with Room and custom DAOs",
+      "Notification scheduling for reminders"
+    ],
+    image: `${import.meta.env.BASE_URL}assets/images/Daily BLOOM.png`,
+    github: "https://github.com/D0017/DailyBloom",
+    demo: null,
+    featured: false
+  },  
  
 ];
