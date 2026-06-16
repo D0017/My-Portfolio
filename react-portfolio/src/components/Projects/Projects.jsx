@@ -1,8 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../../data/projects";
 import AnimatedTitle from "../AnimatedTitle";
 import FeaturedProjectPoster from "./FeaturedProjectPoster";
+import ProjectCategoryAccordion from "./ProjectCategoryAccordion";
+
+const MotionSection = motion.section;
+const MotionDiv = motion.div;
 
 const cardVariants = {
   enter: (direction) => ({
@@ -24,42 +28,95 @@ const cardVariants = {
   }),
 };
 
-const MotionSection = motion.section;
-const MotionDiv = motion.div;
-
 const Projects = () => {
-  const totalProjects = projects.length;
-  const featuredIndex = projects.findIndex((project) => project.featured);
-
-  const [index, setIndex] = useState(featuredIndex !== -1 ? featuredIndex : 0);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
   const [direction, setDirection] = useState(1);
 
+  const projectDetailsRef = useRef(null);
+  const [shouldScrollToProject, setShouldScrollToProject] = useState(false);
+
+  const filteredProjects = useMemo(() => {
+    if (!activeCategory) return [];
+
+    return projects.filter(
+      (project) => project.category === activeCategory
+    );
+  }, [activeCategory]);
+
+  const selectedIndex = filteredProjects.findIndex(
+    (project) => project.id === selectedProjectId
+  );
+
+  const currentProject =
+    selectedIndex !== -1 ? filteredProjects[selectedIndex] : null;
+
+  const handleSelectCategory = (categoryId) => {
+    setActiveCategory(categoryId);
+    setSelectedProjectId(null);
+  };
+
+  const handleSelectProject = (projectId) => {
+  setSelectedProjectId(projectId);
+  setShouldScrollToProject(true);
+};
+
   const showNext = useCallback(() => {
-    if (totalProjects === 0) return;
+    if (filteredProjects.length === 0) return;
 
     setDirection(1);
-    setIndex((prev) => (prev + 1) % totalProjects);
-  }, [totalProjects]);
+
+    if (!currentProject) {
+      setSelectedProjectId(filteredProjects[0].id);
+      return;
+    }
+
+    const nextIndex = (selectedIndex + 1) % filteredProjects.length;
+    setSelectedProjectId(filteredProjects[nextIndex].id);
+  }, [filteredProjects, currentProject, selectedIndex]);
 
   const showPrev = useCallback(() => {
-    if (totalProjects === 0) return;
+    if (filteredProjects.length === 0) return;
 
     setDirection(-1);
-    setIndex((prev) => (prev === 0 ? totalProjects - 1 : prev - 1));
-  }, [totalProjects]);
+
+    if (!currentProject) {
+      setSelectedProjectId(filteredProjects[0].id);
+      return;
+    }
+
+    const prevIndex =
+      selectedIndex === 0 ? filteredProjects.length - 1 : selectedIndex - 1;
+
+    setSelectedProjectId(filteredProjects[prevIndex].id);
+  }, [filteredProjects, currentProject, selectedIndex]);
+
+  useEffect(() => {
+    if (!currentProject || !shouldScrollToProject) return;
+
+    const scrollTimer = window.setTimeout(() => {
+      projectDetailsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+
+      setShouldScrollToProject(false);
+    }, 120);
+
+    return () => window.clearTimeout(scrollTimer);
+  }, [currentProject, shouldScrollToProject]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      const target = event.target;
-      const tagName = target?.tagName?.toLowerCase();
+      const tagName = event.target?.tagName?.toLowerCase();
 
       const isTyping =
         tagName === "input" ||
         tagName === "textarea" ||
         tagName === "select" ||
-        target?.isContentEditable;
+        event.target?.isContentEditable;
 
-      if (isTyping) return;
+      if (isTyping || !activeCategory) return;
 
       if (event.key === "ArrowRight") {
         event.preventDefault();
@@ -77,11 +134,7 @@ const Projects = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [showNext, showPrev]);
-
-  if (totalProjects === 0) return null;
-
-  const currentProject = projects[index];
+  }, [activeCategory, showNext, showPrev]);
 
   return (
     <motion.section
@@ -97,44 +150,67 @@ const Projects = () => {
           <AnimatedTitle text="PROJECTS" />
         </div>
 
-        <div className="poster-slider-shell">
-          <button
-            type="button"
-            className="poster-side-btn poster-side-btn--prev"
-            onClick={showPrev}
-            aria-label="Previous project"
-          >
-            ←
-          </button>
+        <ProjectCategoryAccordion
+          projects={projects}
+          activeCategory={activeCategory}
+          selectedProjectId={selectedProjectId}
+          onSelectCategory={handleSelectCategory}
+          onSelectProject={handleSelectProject}
+        />
 
-          <div className="poster-slide-area">
-            <AnimatePresence mode="wait" custom={direction} initial={false}>
-              <motion.div
-                key={currentProject.id}
-                custom={direction}
-                variants={cardVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-              >
-                <FeaturedProjectPoster project={currentProject} />
-              </motion.div>
-            </AnimatePresence>
+        {!currentProject && activeCategory && (
+          <div className="project-select-hint">
+            Select a project from the opened category to view the full project
+            details.
           </div>
+        )}
 
-          <button
-            type="button"
-            className="poster-side-btn poster-side-btn--next"
-            onClick={showNext}
-            aria-label="Next project"
-          >
-            →
-          </button>
-        </div>
+        {currentProject && (
+          <>
+            <div className="poster-slider-shell" ref={projectDetailsRef}>
+              {filteredProjects.length > 1 && (
+                <button
+                  type="button"
+                  className="poster-side-btn poster-side-btn--prev"
+                  onClick={showPrev}
+                  aria-label="Previous project"
+                >
+                  ←
+                </button>
+              )}
 
-        <div className="poster-count">
-          {index + 1} / {totalProjects}
-        </div>
+              <div className="poster-slide-area">
+                <AnimatePresence mode="wait" custom={direction} initial={false}>
+                  <motion.div
+                    key={currentProject.id}
+                    custom={direction}
+                    variants={cardVariants}
+                    initial="enter"
+                    animate="center"
+                    exit="exit"
+                  >
+                    <FeaturedProjectPoster project={currentProject} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {filteredProjects.length > 1 && (
+                <button
+                  type="button"
+                  className="poster-side-btn poster-side-btn--next"
+                  onClick={showNext}
+                  aria-label="Next project"
+                >
+                  →
+                </button>
+              )}
+            </div>
+
+            <div className="poster-count">
+              {selectedIndex + 1} / {filteredProjects.length}
+            </div>
+          </>
+        )}
       </div>
     </motion.section>
   );
