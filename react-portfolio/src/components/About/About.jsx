@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import AnimatedTitle from "../AnimatedTitle";
 import ProfileCard from "./ProfileCard";
@@ -30,7 +31,7 @@ const About = () => {
           <div className="about2-layout">
             <div className="about2-main">
               <h3 className="about2-headline">
-                Driven by <span>curiosity</span>,{" "}shaped through{" "}
+                Driven by curiosity,{" "}shaped through{" "}
                 <span>continuous learning</span>.
               </h3>
 
