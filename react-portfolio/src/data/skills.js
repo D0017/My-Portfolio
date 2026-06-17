@@ -1,38 +1,50 @@
 export const skills = {
-  frontend: [
-    "HTML",
-    "CSS",
-    "JavaScript ",
-    "React",
-    "Bootstrap / Tailwind "
+  "Programming Languages": [
+    "JavaScript",
+    "Java",
+    "Python",
+    "C",
+    "C++",
+    "Kotlin",
   ],
-  backend: [
+
+  "Web Technologies": [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+  ],
+
+  "Frameworks & Libraries": [
+    "React.js",
+    "Tailwind CSS",
     "Node.js",
     "Express.js",
-    "PHP",
-    "REST APIs"
+    "Spring Boot",
+    "Mongoose",
   ],
-  mobile: [
-    "Kotlin",
-    "Android Studio",
-    "MVVM Architecture",
-    "Room Database"
-  ],
-  databases: [
+
+  "Databases": [
+    "MySQL",
     "MongoDB",
-    "MySQL"
   ],
-  tools: [
-    "Git & GitHub",
-    "VS Code",
-    "Postman",
+
+  "Design & Prototyping": [
+    "Figma",
+    "Mockflow",
+  ],
+
+  "Development Tools & IDEs": [
+    "Vite",
+    "Git",
+    "GitHub",
+    "Visual Studio Code",
     "Android Studio",
-    "Figma / UI wireframing tools"
+    "MySQL Workbench",
   ],
-  concepts: [
-    "OOP",
-    "RESTful API design",
-    "Responsive Web Design",
-    "Agile / Scrum basics"
-  ]
+
+  "Testing Tools": [
+    "Postman",
+    "Playwright",
+    "pytest",
+  ],
 };
