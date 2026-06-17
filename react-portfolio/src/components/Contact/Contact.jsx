@@ -5,12 +5,15 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { isValidPhoneNumber } from "react-phone-number-input";
 
+const MotionSection = motion.section;
+const MotionDiv = motion.div;
+
 
 const Contact = () => {
   const formRef = useRef(null);
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState(null); 
-  const [budget, setBudget] = useState("50-100");
+ // const [budget, setBudget] = useState("50-100");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(null);
 
@@ -37,7 +40,7 @@ const Contact = () => {
       setStatus("success");
       formRef.current.reset();
       setPhone("");
-      setBudget("50-100");
+      // setBudget("50-100");
     } catch (err) {
       console.error(err);
       setSending(false);
@@ -113,6 +116,31 @@ const Contact = () => {
             </a>
           </div>
 
+          <div className="contact-cv-download">
+            <a
+              href={`${import.meta.env.BASE_URL}assets/documents/Praveen_Dinuwara_CV.pdf`}
+              download="Praveen_Dinuwara_CV.pdf"
+              className="cv-download-btn"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"
+                />
+              </svg>
+              <span>Download CV</span>
+            </a>
+          </div>
 
           <div className="contact-address">
             <p>Address:</p>

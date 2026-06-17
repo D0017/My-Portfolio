@@ -47,10 +47,9 @@ const ProjectCategoryAccordion = ({
 
           return (
             <motion.article
-              layout
               key={category.id}
               tabIndex={0}
-              role="button"
+              role="button" 
               aria-expanded={isOpen}
               className={`category-panel-v2 ${isOpen ? "is-open" : ""} ${
                 isClicked ? "is-clicked" : ""
@@ -58,8 +57,7 @@ const ProjectCategoryAccordion = ({
               onMouseEnter={() => setHoveredCategory(category.id)}
               onFocus={() => setHoveredCategory(category.id)}
               onClick={() => onSelectCategory(category.id)}
-              onKeyDown={(event) => handleKeyboardSelect(event, category.id)}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+              onKeyDown={(event) => handleKeyboardSelect(event, category.id)}             
             >
               <div className="category-minimal-head">
                 <span className="category-index">
