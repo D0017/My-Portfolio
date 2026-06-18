@@ -32,7 +32,7 @@ const About = () => {
             <div className="about2-main">
               <h3 className="about2-headline">
                 Driven by curiosity,{" "}shaped through{" "}
-                <span>continuous learning</span>.
+                continuous learning.
               </h3>
 
               <p className="about2-text">
