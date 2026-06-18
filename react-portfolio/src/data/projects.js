@@ -180,7 +180,7 @@ export const projects = [
     "Deployed the portfolio using GitHub Pages"
   ],
   image: `${import.meta.env.BASE_URL}assets/images/portfolio.png`,
-  github: "https://github.com/D0017/My-Portfolio",
+  github: null,
   demo: "https://d0017.github.io/My-Portfolio/",
   featured: false
 },
